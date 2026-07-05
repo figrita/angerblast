@@ -1,0 +1,17 @@
+# Rimebeast - a BEEFY lunger: creeps down, pounces hard when close, big death burst. The
+# Frost biome's heavy bruiser. Slow but very dangerous up close.
+name="Rimebeast"
+sprite="sprites/03_frost/rimebeast.png"
+flavor="Shaggy with hoarfrost; lunges before it thinks. It never thinks."
+move="lunge"
+move_params={ creep_mul=0.4, trigger_dist=260, lunge_mul=3.8, lunge_dur=0.55, recover_dur=1.3 }
+fire="none"
+death_burst=12
+hp=60
+speed=30
+radius=20
+fire_interval=0.0
+min_stage=3
+color="steel"
+xp=5
+shape=[{op="poly",sides=8,r=1.0,color="body",outline="ice"},{op="poly",sides=8,r=0.55,color="ice",alpha=0.7},{op="circle",r=0.25,color="white"}]

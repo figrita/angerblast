@@ -1,0 +1,59 @@
+# 04_tempest - Tempest Core. Fourth biome: violent storm palette, dense fast waves, a
+# multi-part boss (head + two hands). The hardest of the "elemental" run before the abstract
+# worlds. Mixes lunging bruisers, spiral fire, and storm-tinted remixes.
+name = "Tempest Core"
+
+[theme]
+bullet_color = "crimson"
+gem_color = "palecyan"
+background = "deeppurple"
+star_colors = ["violet", "lavender", "ice"]
+
+[director]
+field_cap_base = 40
+field_cap_per_stage = 42
+field_cap_max = 700
+wave_interval_base = 8.0
+waves_to_boss = 13
+formations = ["stream", "swarm", "vee", "grid"]
+
+[boss]
+name = "Storm Sovereign"
+hp = 1600
+radius = 56
+phases = [
+  { hp_above = 0.5, fire = "spread", count = 8 },
+  { hp_above = 0.0, fire = "spread", count = 12, plus = "flower" },
+]
+# head + two hands; head shielded until the hands fall (classic).
+[[boss.part]]
+sprite="sprites/04_tempest/boss_head.png"
+head = true
+off_y = -10
+hp = 1100
+radius = 48
+emitter = "spiral_pods"
+interval = 1.0
+color = "gold"
+
+[[boss.part]]
+sprite="sprites/04_tempest/boss_hand.png"
+off_x = -140
+off_y = 44
+hp = 460
+radius = 32
+fire = "ring"
+count = 12
+interval = 1.2
+color = "coral"
+
+[[boss.part]]
+sprite="sprites/04_tempest/boss_hand.png"
+off_x = 140
+off_y = 44
+hp = 460
+radius = 32
+fire = "spiral"
+count = 4
+interval = 0.9
+color = "coral"

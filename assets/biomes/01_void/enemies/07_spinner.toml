@@ -1,0 +1,16 @@
+# Spinner
+name="Whirling Idol"
+sprite="sprites/01_void/whirling_idol.png"
+flavor="A heretic shrine that spins itself into a fusillade."
+move="hover"
+move_params={ strafe_freq=0.8, strafe_amp=2.0 }
+fire="ring"
+fire_params={ count=8, count_per_stage=0, speed_scale=0.8, arc=6.28319, spin=0.4, aimed=false, color="hotpink" }
+hp=16
+speed=28
+radius=14
+fire_interval=2.2
+min_stage=2
+color="orchid"
+xp=3
+shape=[{op="poly",sides=5,r=1.0,color="body",spin=40},{op="circle",r=0.35,color="white",alpha=0.5}]

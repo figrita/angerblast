@@ -1,0 +1,16 @@
+# Maelstrom - a beefy lunger bruiser of the storm: creeps, then pounces with a heavy burst.
+name="Maelstrom"
+sprite="sprites/04_tempest/maelstrom.png"
+flavor="The eye of the storm, hunting a new center: you."
+move="lunge"
+move_params={ creep_mul=0.5, trigger_dist=280, lunge_mul=4.0, lunge_dur=0.5, recover_dur=1.1 }
+fire="none"
+death_burst=14
+hp=70
+speed=32
+radius=21
+fire_interval=0.0
+min_stage=3
+color="coral"
+xp=6
+shape=[{op="poly",sides=8,r=1.0,color="body",outline="white"},{op="poly",sides=8,r=0.5,color="lavender",alpha=0.85},{op="circle",r=0.25,color="white"}]

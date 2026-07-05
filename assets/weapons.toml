@@ -1,0 +1,34 @@
+# weapons.toml - the weapon registry (order matters: index = WeaponId, MAINGUN first).
+# base_interval = seconds between fires at level 1; base_damage = damage at level 1.
+# `emit` selects the firing primitive (see EmitOp in weapons_def.h); `emit_params` carries
+# that primitive's numbers. Firing is now data-driven: a new weapon = a new row here.
+#
+# emit_params fields (interpreted per emit op):
+#   speed_scale  multiplies player bullet speed (straight/aimed/autoaim/lob); for
+#                homing_volley it is the ABSOLUTE projectile speed (px/s).
+#   radius       projectile radius (px).
+#   spread       MAINGUN: total fan arc (rad). aimed/autoaim: per-extra-projectile step (rad).
+#                cone/homing_volley(missile): total scatter arc (rad). 6.28319 = full ring.
+#   pierce       forced pierce (ION=999); omit to use rune/stat pierce.
+#   evo_bonus    extra projectiles when evolved (homing_volley).
+#   dirs         fixed_dirs: angles to fire along (rad). 0=right, 3.14159=left.
+#   base_radius/per_level/per_multi/evo_radius  aura/orbital/cone radius (reach) scaling.
+#   targets      chain hop count base (chain) OR orbiting balls base (orbital).
+#   range        chain/autoaim search range (px).
+# NOTE: tomlc99 forbids newlines inside an inline table, so each weapon is one line.
+
+weapon = [
+  {name="Main Cannon",   base_interval=0.14, base_damage=6,  color="palecyan", sprite="sprites/common/wpn_maincannon.png",   emit="straight",      emit_params={ speed_scale=1.0, radius=5, spread=0.30 }},
+  {name="Side Guns",     base_interval=0.50, base_damage=13,  color="peach",    sprite="sprites/common/wpn_sideguns.png",     emit="fixed_dirs",    emit_params={ speed_scale=1.0, radius=4, dirs=[0.0, 3.14159] }},
+  {name="Tail Gun",      base_interval=0.40, base_damage=11,  color="orchid",   sprite="sprites/common/wpn_tailgun.png",      emit="straight",      emit_params={ speed_scale=1.0, radius=4 }},
+  {name="Homing Swarm",  base_interval=1.20, base_damage=17, color="mint",     sprite="sprites/common/wpn_homingswarm.png",  emit="homing_volley", emit_params={ speed_scale=120, radius=5, spread=6.28319, evo_bonus=2 }},
+  {name="Chain Bolt",    base_interval=0.70, base_damage=18, color="palecyan", sprite="sprites/common/wpn_chainbolt.png",    emit="chain",         emit_params={ targets=2, range=420 }},
+  {name="Damage Aura",   base_interval=0.25, base_damage=10,  color="coral",    sprite="sprites/common/wpn_damageaura.png",   emit="aura",          emit_params={ base_radius=60, per_level=14, per_multi=16, evo_radius=40 }},
+  {name="Orbital",       base_interval=0.00, base_damage=12, color="ice",      sprite="sprites/common/wpn_orbital.png",      emit="orbital",       emit_params={ targets=2, base_radius=46, per_level=6, evo_radius=24 }},
+  {name="Aim Cannon",    base_interval=0.22, base_damage=12, color="gold",     sprite="sprites/common/wpn_aimcannon.png",    emit="aimed",         emit_params={ radius=5, spread=0.12 }},
+  {name="Auto-Aim Gun",  base_interval=0.30, base_damage=13, color="leaf",     sprite="sprites/common/wpn_autoaim.png",      emit="autoaim",       emit_params={ speed_scale=1.1, radius=5, spread=0.10, range=700 }},
+  {name="Missiles",      base_interval=0.90, base_damage=26, color="peach",    sprite="sprites/common/wpn_missiles.png",     emit="homing_volley", emit_params={ speed_scale=180, radius=6, spread=1.2 }},
+  {name="Flamethrower",  base_interval=0.05, base_damage=4,  color="peach",    sprite="sprites/common/wpn_flamethrower.png", emit="cone",          emit_params={ base_radius=90, per_level=22, evo_radius=80, count=5, spread=1.0 }},
+  {name="Flammable Goo", base_interval=1.10, base_damage=11,  color="lime",     sprite="sprites/common/wpn_flammablegoo.png", emit="lob",           emit_params={ speed_scale=0.7, radius=7 }},
+  {name="Ion Cannon",    base_interval=1.60, base_damage=60, color="cyan",     sprite="sprites/common/wpn_ioncannon.png",    emit="straight",      emit_params={ speed_scale=1.4, radius=11, pierce=999 }},
+]

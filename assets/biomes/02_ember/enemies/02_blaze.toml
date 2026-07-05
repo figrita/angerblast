@@ -1,0 +1,15 @@
+# Blaze - a triple-layered counter-spinning star (new geometry: 3 poly layers)
+name="Flarecaller"
+sprite="sprites/02_ember/flarecaller.png"
+flavor="Conducts the firestorm like a choir."
+move="hover"
+fire="flower"
+hp=24
+speed=22
+radius=16
+fire_interval=1.4
+min_stage=2
+color="peach"
+xp=4
+shape=[{op="poly",sides=6,r=1.0,color="red",spin=60},{op="poly",sides=6,r=0.7,color="gold",spin=-90,alpha=0.9},{op="circle",r=0.3,color="white"}]
+fire_params={ speed_scale=1.25 }

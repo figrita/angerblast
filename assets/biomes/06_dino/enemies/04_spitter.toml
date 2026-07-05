@@ -1,0 +1,16 @@
+# Dilo Spitter - a drifting venom-spitter: a 3-shot aimed spread of acid. Mid-range threat
+# among the melee crowd.
+name="Spitter"
+sprite="sprites/06_dino/spitter.png"
+flavor="Keeps its venom pre-chewed."
+move="drift"
+fire="spread"
+fire_params={ count=3, arc=0.55, speed_scale=1.0, aimed=true, color="lime" }
+hp=22
+speed=18
+radius=14
+fire_interval=2.0
+min_stage=2
+color="olive"
+xp=3
+shape=[{op="poly",sides=5,r=1.0,color="body",outline="gold"},{op="circle",r=0.4,color="lime",alpha=0.7}]

@@ -1,0 +1,185 @@
+<title>Angerblast hum studio</title>
+<style>
+  :root{--ink:#12173d;--deep:#000;--line:#293268;--text:#c1d9f2;--dim:#909edd;
+        --gold:#ffe091;--mint:#8cff9b;--coral:#ff695a}
+  html{background:var(--deep)}
+  body{margin:0;font:14px/1.6 ui-monospace,'Cascadia Mono',Menlo,Consolas,monospace;
+       color:var(--text);background:var(--deep);max-width:760px;margin:0 auto;padding:24px 16px}
+  h1{font-size:16px;color:var(--gold);letter-spacing:.14em;text-transform:uppercase}
+  .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:12px 0}
+  .lbl{color:var(--dim)}
+  button,select,input{font:inherit;background:var(--ink);color:var(--text);
+        border:1px solid var(--line);padding:6px 14px;cursor:pointer}
+  button.on{color:var(--gold);border-color:var(--gold)}
+  button.rec{color:var(--coral);border-color:var(--coral)}
+  button.big{font-size:16px;padding:10px 22px}
+  #state{font-size:22px;color:var(--gold);letter-spacing:.1em;min-height:34px}
+  #beat{display:flex;gap:8px;margin:8px 0}
+  #beat i{width:26px;height:26px;background:var(--ink);border:1px solid var(--line)}
+  #beat i.on{background:var(--gold)}
+  #beat i.acc.on{background:var(--coral)}
+  .panel{border:1px solid var(--line);background:rgba(18,23,61,.5);padding:14px 16px;margin:14px 0}
+  code{display:block;background:var(--ink);border:1px solid var(--line);padding:10px;
+       margin-top:8px;color:var(--mint);word-break:break-all;user-select:all}
+  a{color:var(--gold)}
+  .hint{color:var(--dim);font-size:12px}
+</style>
+<h1>Angerblast &mdash; hum studio</h1>
+<div class="hint">wear HEADPHONES (the mic must not hear the backing) &middot; serve over http://localhost so the mic works</div>
+
+<div class="row">
+  <span class="lbl">style</span><select id="style"></select>
+  <span class="lbl">bpm</span><input type="number" id="bpm" min="50" max="180" style="width:70px">
+  <span class="lbl">bars</span><select id="bars"><option>8</option><option selected>16</option><option>32</option></select>
+</div>
+
+<div id="beat"></div>
+<div id="state">ready</div>
+
+<div class="row">
+  <button id="preview" class="big">&#9654; hear backing</button>
+  <button id="record" class="big rec">&#9679; record take</button>
+  <button id="stop" class="big">&#9632; stop</button>
+</div>
+<div class="hint">record = 1 count-in bar of clicks, then the chords start and the mic rolls. Sing! It stops itself after the last bar.</div>
+
+<div class="panel" id="takePanel" style="display:none">
+  <b>take ready</b> &mdash; <a id="dl" download="take.webm">download take.webm</a>
+  <audio id="playback" controls style="width:100%;margin-top:8px"></audio>
+  <div class="row"><button id="review">&#9654; replay take over backing</button></div>
+  then run:
+  <code id="cmd"></code>
+</div>
+
+<script>
+const STYLES = {"01_void":{"bpm":84,"prog":[0,5,2,6],"root":45,"mode":"aeolian","bass_wave":"tri"},"02_ember":{"bpm":104,"prog":[0,1,0,6],"root":40,"mode":"phrygian","bass_wave":"sq"},"03_frost":{"bpm":76,"prog":[0,3,4,1],"root":48,"mode":"lydian","bass_wave":"tri"},"04_tempest":{"bpm":112,"prog":[0,3,5,4],"root":50,"mode":"dorian","bass_wave":"sq"},"05_abyss":{"bpm":68,"prog":[0,0,5,6],"root":38,"mode":"phrygian","bass_wave":"tri"},"06_dino":{"bpm":96,"prog":[0,4,0,3],"root":43,"mode":"mixolydian","bass_wave":"sq"}};
+const MODES = {"aeolian":[0,2,3,5,7,8,10],"phrygian":[0,1,3,5,7,8,10],"lydian":[0,2,4,6,7,9,11],"dorian":[0,2,3,5,7,9,10],"mixolydian":[0,2,4,5,7,9,10]};
+const $ = s => document.querySelector(s);
+const styleSel = $('#style');
+for (const s of Object.keys(STYLES)) {
+  const o = document.createElement('option'); o.textContent = s; styleSel.appendChild(o);
+}
+const beatBox = $('#beat');
+for (let i = 0; i < 4; i++) {
+  const b = document.createElement('i'); if (i === 0) b.className = 'acc'; beatBox.appendChild(b);
+}
+function styleName() { return styleSel.value; }
+function style() { return STYLES[styleName()]; }
+styleSel.onchange = () => { $('#bpm').value = style().bpm; };
+$('#bpm').value = style().bpm;
+
+let actx = null;
+function ctx() { if (!actx) actx = new AudioContext(); return actx; }
+function hz(m) { return 440 * Math.pow(2, (m - 69) / 12); }
+
+// ---- backing synth: click + pad triads + bass roots ----
+let nodes = [];
+function tone(type, f, t0, dur, gain) {
+  const ac = ctx(), o = ac.createOscillator(), g = ac.createGain();
+  o.type = type; o.frequency.value = f;
+  g.gain.setValueAtTime(gain, t0);
+  g.gain.exponentialRampToValueAtTime(0.001, t0 + dur);
+  o.connect(g).connect(ac.destination);
+  o.start(t0); o.stop(t0 + dur + 0.05); nodes.push(o);
+}
+function click(t0, accent) { tone('square', accent ? 1660 : 1245, t0, 0.035, accent ? 0.5 : 0.3); }
+
+function scheduleBacking(t0, bars, withCountIn) {
+  const st = style(), bpm = parseFloat($('#bpm').value) || st.bpm;
+  const spb = 60 / bpm, scale = MODES[st.mode];
+  let t = t0;
+  if (withCountIn) { for (let b = 0; b < 4; b++) click(t + b * spb, b === 0); t += 4 * spb; }
+  const musicStart = t;
+  for (let bar = 0; bar < bars; bar++) {
+    const deg0 = st.prog[bar % st.prog.length];
+    for (let iv = 0; iv < 5; iv += 2) {
+      const deg = deg0 + iv;
+      const n = st.root + scale[deg % 7] + 12 * Math.floor(deg / 7);
+      tone('triangle', hz(n) * 1.003, t, 4 * spb, 0.10);
+      tone('triangle', hz(n) * 0.997, t, 4 * spb, 0.10);
+    }
+    for (let beat = 0; beat < 4; beat++) {
+      click(t + beat * spb, beat === 0);
+      tone(st.bass_wave === 'sq' ? 'square' : 'triangle',
+           hz(st.root + scale[deg0 % 7] - 12), t + beat * spb, 0.3, 0.16);
+    }
+    t += 4 * spb;
+  }
+  return { musicStart: musicStart, end: t, spb: spb, bpm: bpm };
+}
+function stopAll() {
+  for (const n of nodes) { try { n.stop(); } catch (e) {} }
+  nodes = [];
+  clearInterval(beatTimer); beatTimer = null;
+  [...beatBox.children].forEach(c => c.classList.remove('on'));
+  $('#state').textContent = 'ready';
+  if (rec && rec.state === 'recording') rec.stop();
+}
+let beatTimer = null;
+function animateBeats(info, endAt) {
+  clearInterval(beatTimer);
+  beatTimer = setInterval(() => {
+    const now = ctx().currentTime;
+    if (now > endAt) { stopAll(); return; }
+    const beat = Math.floor(Math.max(0, now - info.musicStart) / info.spb) % 4;
+    const inCount = now < info.musicStart;
+    $('#state').textContent = inCount ? 'count-in…'
+      : ('bar ' + (Math.floor((now - info.musicStart) / (info.spb * 4)) + 1));
+    [...beatBox.children].forEach((c, i) => c.classList.toggle('on', i === beat));
+  }, 40);
+}
+
+$('#preview').onclick = () => {
+  stopAll();
+  const info = scheduleBacking(ctx().currentTime + 0.1, parseInt($('#bars').value), false);
+  animateBeats(info, info.end);
+};
+$('#stop').onclick = stopAll;
+
+// ---- recording: mic starts exactly at bar 1 (after the count-in) ----
+let rec = null, chunks = [];
+$('#record').onclick = async () => {
+  stopAll();
+  let stream;
+  try { stream = await navigator.mediaDevices.getUserMedia({ audio: {
+    echoCancellation: false, noiseSuppression: false, autoGainControl: true } }); }
+  catch (e) { $('#state').textContent = 'mic blocked: ' + e.name + ' (use http://localhost)'; return; }
+  const mime = MediaRecorder.isTypeSupported('audio/webm;codecs=opus') ? 'audio/webm;codecs=opus' : '';
+  rec = new MediaRecorder(stream, mime ? { mimeType: mime } : {});
+  chunks = [];
+  rec.ondataavailable = e => chunks.push(e.data);
+  rec.onstop = () => {
+    stream.getTracks().forEach(tr => tr.stop());
+    const blob = new Blob(chunks, { type: rec.mimeType });
+    const url = URL.createObjectURL(blob);
+    $('#dl').href = url;
+    $('#playback').src = url;
+    $('#takePanel').style.display = 'block';
+    const bpm = parseFloat($('#bpm').value) || style().bpm;
+    $('#cmd').textContent = './tools/audio/hum2song.sh ~/Downloads/take.webm --slug '
+      + styleName() + ' --bpm ' + bpm + ' --anchored';
+    lastBlobURL = url;
+  };
+  const bars = parseInt($('#bars').value);
+  const info = scheduleBacking(ctx().currentTime + 0.15, bars, true);
+  // start the mic exactly when bar 1 lands (setTimeout jitter ~ms << a 16th)
+  const waitMs = (info.musicStart - ctx().currentTime) * 1000;
+  setTimeout(() => { if (nodes.length) { rec.start(); } }, waitMs);
+  setTimeout(() => { if (rec && rec.state === 'recording') rec.stop(); },
+             (info.end - ctx().currentTime) * 1000 + 300);
+  animateBeats(info, info.end + 0.3);
+  $('#state').textContent = 'count-in…';
+};
+
+// replay the take over a fresh backing (both start together)
+let lastBlobURL = null;
+$('#review').onclick = () => {
+  stopAll();
+  const bars = parseInt($('#bars').value);
+  const info = scheduleBacking(ctx().currentTime + 0.15, bars, false);
+  const a = $('#playback');
+  a.currentTime = 0;
+  setTimeout(() => a.play(), (info.musicStart - ctx().currentTime) * 1000);
+  animateBeats(info, info.end);
+};
+</script>

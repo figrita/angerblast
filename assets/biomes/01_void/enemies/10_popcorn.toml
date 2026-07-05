@@ -1,0 +1,14 @@
+# Popcorn
+name="Sparkfly"
+sprite="sprites/01_void/sparkfly.png"
+flavor="Harmless alone. They are never alone."
+move="straight"
+fire="none"
+hp=4
+speed=90
+radius=8
+fire_interval=0.0
+min_stage=1
+color="gold"
+xp=1
+shape=[{op="circle",r=1.0,color="body"},{op="circle",r=0.35,color="white",alpha=0.5}]

@@ -1,0 +1,63 @@
+# 02_ember - the second biome. Hotter palette, denser swarm, tougher boss. Authored
+# entirely as data: this folder + its enemies/, no engine changes.
+name = "Ember Reach"
+
+[theme]
+bullet_color = "gold"
+gem_color = "palecyan"
+background = "umber"
+star_colors = ["maroon", "wine", "peach"]
+
+[director]
+field_cap_base = 80
+field_cap_per_stage = 24
+field_cap_max = 480
+wave_interval_base = 11.0
+waves_to_boss = 11
+formations = ["stream", "swarm", "vee"]
+
+[boss]
+name = "Cinder Tyrant"
+hp = 900
+radius = 52
+phases = [
+  { hp_above = 0.5, fire = "spread", count = 6 },
+  { hp_above = 0.0, fire = "spread", count = 9, plus = "flower" },
+]
+# Multi-part layout: a head flanked by two hands. The HEAD is shielded (unhittable) until
+# BOTH hands are destroyed; killing the head ends the fight. Each part fires its own danmaku.
+# (When [[boss.part]] is present the single-body `phases` above are ignored for combat.)
+[[boss.part]]
+sprite="sprites/02_ember/boss_head.png"
+head = true
+off_x = 0
+off_y = -10
+hp = 700
+radius = 46
+fire = "aimed"
+count = 5
+interval = 1.1
+color = "crimson"
+emitter = "spiral_pods"      # once exposed, the head sheds recursive ring-pods
+
+[[boss.part]]
+sprite="sprites/02_ember/boss_hand.png"
+off_x = -130
+off_y = 40
+hp = 300
+radius = 30
+fire = "ring"
+count = 10
+interval = 1.4
+color = "maroon"
+
+[[boss.part]]
+sprite="sprites/02_ember/boss_hand.png"
+off_x = 130
+off_y = 40
+hp = 300
+radius = 30
+fire = "spread"
+count = 7
+interval = 1.0
+color = "maroon"

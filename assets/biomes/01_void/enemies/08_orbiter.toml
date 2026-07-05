@@ -1,0 +1,15 @@
+# Orbiter
+name="Carrion Moth"
+sprite="sprites/01_void/carrion_moth.png"
+flavor="Circles dead satellites, then dives at whatever still moves."
+move="orbit"
+move_params={ orbit_time=2.5, radius=60, ang_rate=2.0, y_scale=0.5, descend_mul=0.3, dive_mul=1.4 }
+fire="none"
+hp=9
+speed=50
+radius=11
+fire_interval=0.0
+min_stage=3
+color="peach"
+xp=2
+shape=[{op="poly",sides=3,r=1.0,color="body",spin_offset=90},{op="circle",r=0.35,color="white",alpha=0.5}]

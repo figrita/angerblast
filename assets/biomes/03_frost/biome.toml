@@ -1,0 +1,28 @@
+# 03_frost - Frost Verge. The third biome: icy palette, swoopers + spiral-descenders +
+# lunging beefy enemies, plus harder ICE-tinted remixes of earlier foes. Tougher than ember.
+name = "Frost Verge"
+
+[theme]
+bullet_color = "crimson"
+gem_color = "orchid"
+background = "abyss"
+star_colors = ["deepteal", "teal", "ice"]
+
+[director]
+field_cap_base = 36
+field_cap_per_stage = 38
+field_cap_max = 640
+wave_interval_base = 9.0
+waves_to_boss = 12
+formations = ["vee", "stream", "grid", "swarm"]
+
+[boss]
+name = "Glacial Wyrm"
+sprite="sprites/03_frost/boss.png"
+hp = 1300
+radius = 54
+phases = [
+  { hp_above = 0.6, fire = "ring",   count = 10 },
+  { hp_above = 0.3, fire = "spiral", count = 4, plus = "flower" },
+  { hp_above = 0.0, fire = "ring",   count = 16, plus = "flower" },
+]

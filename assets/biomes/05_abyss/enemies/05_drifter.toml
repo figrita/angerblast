@@ -1,0 +1,16 @@
+# Abyss Drifter - a deep-sea remix of the Void Diver: same hold-then-swoop dive, abyssal tint,
+# tankier, with a bubble-burst on death.
+name="Abyss Drifter"
+sprite="sprites/05_abyss/abyss_drifter.png"
+flavor="Falls upward out of the trench when it smells warmth."
+move="dive"
+move_params={ descend_mul=0.5, hold_time=1.4, dive_mul=1.8 }
+fire="none"
+hp=18
+speed=46
+radius=12
+fire_interval=0.0
+min_stage=1
+color="nightteal"
+xp=2
+shape=[{op="poly",sides=3,r=1.0,color="body",spin_offset=90},{op="circle",r=0.35,color="aquabrt",alpha=0.6}]

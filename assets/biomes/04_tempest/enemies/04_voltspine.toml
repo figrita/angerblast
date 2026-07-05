@@ -1,0 +1,18 @@
+# Volt Grunt - storm-tinted, beefier remix of the Grunt (march) with a periodic lunge layer
+# so the formation occasionally surges at you.
+name="Voltspine"
+sprite="sprites/04_tempest/voltspine.png"
+flavor="Marches to the drum of its own thunder."
+move="march"
+move_params={ step_mul=1.2, edge_margin=40, row_drop=30, settle_speed=8 }
+fire="none"
+death_burst=5
+lunge_every=3.0
+hp=22
+speed=34
+radius=13
+fire_interval=0.0
+min_stage=1
+color="peach"
+xp=3
+shape=[{op="rect",w=2.0,h=2.0,color="body",outline="white"},{op="circle",r=0.35,color="white",alpha=0.85}]

@@ -1,0 +1,90 @@
+# effects.toml - status effects, in order (slow, burn, poison, freeze, shock, weaken, mark, goo).
+# stack: "refresh" | "max_duration" | "add"
+
+[[effect]]
+name = "Slow"
+color = "sky"
+sprite = "sprites/common/fx_slow.png"
+duration = 2.5
+stack = "max_duration"
+max_stacks = 1
+dot = false
+halts_move = false
+halts_fire = false
+
+[[effect]]
+name = "Burn"
+color = "peach"
+sprite = "sprites/common/fx_burn.png"
+duration = 3.0
+stack = "refresh"
+max_stacks = 1
+dot = true
+halts_move = false
+halts_fire = false
+
+[[effect]]
+name = "Poison"
+color = "leaf"
+sprite = "sprites/common/fx_poison.png"
+duration = 4.0
+stack = "add"
+max_stacks = 5
+dot = true
+halts_move = false
+halts_fire = false
+
+[[effect]]
+name = "Freeze"
+color = "palecyan"
+sprite = "sprites/common/fx_freeze.png"
+duration = 1.2
+stack = "refresh"
+max_stacks = 1
+dot = false
+halts_move = true
+halts_fire = true
+
+[[effect]]
+name = "Shock"
+color = "gold"
+sprite = "sprites/common/fx_shock.png"
+duration = 0.6
+stack = "refresh"
+max_stacks = 1
+dot = false
+halts_move = true
+halts_fire = false
+
+[[effect]]
+name = "Weaken"
+color = "orchid"
+sprite = "sprites/common/fx_weaken.png"
+duration = 4.0
+stack = "max_duration"
+max_stacks = 1
+dot = false
+halts_move = false
+halts_fire = false
+
+[[effect]]
+name = "Mark"
+color = "white"
+sprite = "sprites/common/fx_mark.png"
+duration = 5.0
+stack = "refresh"
+max_stacks = 1
+dot = false
+halts_move = false
+halts_fire = false
+
+[[effect]]
+name = "Goo"
+color = "lime"
+sprite = "sprites/common/fx_goo.png"
+duration = 5.0
+stack = "refresh"
+max_stacks = 1
+dot = false
+halts_move = false
+halts_fire = false

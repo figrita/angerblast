@@ -1,0 +1,17 @@
+# Drillspike - a SPIRAL descender: corkscrews down its axis while firing aimed shots. Hard to
+# predict; pressures with both movement and fire.
+name="Icebore"
+sprite="sprites/03_frost/icebore.png"
+flavor="Corkscrews through the floe, and anything softer."
+move="spiral"
+move_params={ fall_mul=0.7, spin_rate=3.2, radius=80 }
+fire="aimed"
+fire_params={ count=1, speed_scale=1.0, aimed=true, color="cyan" }
+hp=18
+speed=30
+radius=12
+fire_interval=1.6
+min_stage=2
+color="cyan"
+xp=3
+shape=[{op="poly",sides=4,r=1.0,color="body",spin=120},{op="poly",sides=4,r=0.5,color="white",alpha=0.5,spin=-120}]

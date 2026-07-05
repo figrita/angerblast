@@ -1,0 +1,15 @@
+# Turret
+name="Null Sentry"
+sprite="sprites/01_void/null_sentry.png"
+flavor="A drifting watch-eye that never blinks and never stops firing."
+move="drift"
+fire="aimed"
+fire_params={ count=1, speed_scale=1.0, aimed=true, color="coral" }
+hp=20
+speed=18
+radius=14
+fire_interval=2.0
+min_stage=3
+color="mauve"
+xp=3
+shape=[{op="rect",w=2.0,h=2.0,color="body",outline="white"},{op="circle",r=0.35,color="white",alpha=0.5}]

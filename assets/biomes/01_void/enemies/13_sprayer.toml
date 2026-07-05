@@ -1,0 +1,16 @@
+# Sprayer
+name="Starspitter"
+sprite="sprites/01_void/starspitter.png"
+flavor="Gargles starlight, spits grapeshot."
+move="hover"
+move_params={ strafe_freq=0.8, strafe_amp=2.0 }
+fire="spiral"
+fire_params={ count=2, speed_scale=0.85, arc=6.28319, spin=0.28, aimed=false, color="sky" }
+hp=24
+speed=24
+radius=15
+fire_interval=0.5
+min_stage=5
+color="sky"
+xp=5
+shape=[{op="poly",sides=5,r=1.0,color="body",spin=40},{op="circle",r=0.35,color="white",alpha=0.5}]

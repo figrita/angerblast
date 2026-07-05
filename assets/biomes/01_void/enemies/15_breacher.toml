@@ -1,0 +1,18 @@
+# Breacher - a BEEFY descender that creeps down, then LUNGES at the player when close. Tanky,
+# slow, dangerous up close (death_burst). The "creep then pounce" threat. (note: 14_warden is
+# the void elite; this is a normal-but-heavy enemy.)
+name="Hullripper"
+sprite="sprites/01_void/hullripper.png"
+flavor="Built to open ships like tins. You are the tin."
+move="lunge"
+move_params={ creep_mul=0.45, trigger_dist=240, lunge_mul=3.4, lunge_dur=0.5, recover_dur=1.2 }
+fire="none"
+death_burst=10
+hp=46
+speed=30
+radius=18
+fire_interval=0.0
+min_stage=2
+color="grape"
+xp=4
+shape=[{op="poly",sides=6,r=1.0,color="body",outline="white"},{op="poly",sides=6,r=0.55,color="violet",alpha=0.8},{op="circle",r=0.25,color="white"}]

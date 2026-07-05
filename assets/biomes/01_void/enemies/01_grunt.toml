@@ -1,0 +1,15 @@
+# Grunt
+name="Riftmite"
+sprite="sprites/01_void/riftmite.png"
+flavor="Chittering vanguard of the rift; marches in lockstep and dies in droves."
+move="march"
+move_params={ step_mul=1.0, edge_margin=40, row_drop=26, settle_speed=6 }
+fire="none"
+hp=6
+speed=26
+radius=11
+fire_interval=0.0
+min_stage=1
+color="seagreen"
+xp=1
+shape=[{op="rect",w=2.0,h=2.0,color="body",outline="white"},{op="circle",r=0.35,color="white",alpha=0.5}]

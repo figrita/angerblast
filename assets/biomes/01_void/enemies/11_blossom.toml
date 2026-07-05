@@ -1,0 +1,16 @@
+# Blossom
+name="Nightbloom"
+sprite="sprites/01_void/nightbloom.png"
+flavor="Blooms once per heartbeat; its petals are bullets."
+move="hover"
+move_params={ strafe_freq=0.8, strafe_amp=2.0 }
+fire="flower"
+fire_params={ count=5, speed_scale=0.7, arc=6.28319, spin=0.35, aimed=false, color="hotpink" }
+hp=28
+speed=22
+radius=16
+fire_interval=0.45
+min_stage=4
+color="pink"
+xp=5
+shape=[{op="poly",sides=5,r=1.0,color="body",spin=30},{op="poly",sides=5,r=0.6,color="body",spin=30,spin_offset=36,alpha=0.6}]

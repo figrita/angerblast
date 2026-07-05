@@ -1,0 +1,17 @@
+# Ankylo Stomper - a huge, slow beefy descender that marches down and erupts a big debris
+# burst on death. A wall of HP that pushes you spatially; periodic lunge = a ground-shaking surge.
+name="Stomper"
+sprite="sprites/06_dino/stomper.png"
+flavor="Each footfall files a complaint with the seismograph."
+move="march"
+move_params={ step_mul=0.8, edge_margin=50, row_drop=34, settle_speed=10 }
+fire="none"
+death_burst=16
+hp=90
+speed=22
+radius=24
+fire_interval=0.0
+min_stage=2
+color="clay"
+xp=6
+shape=[{op="poly",sides=6,r=1.0,color="body",outline="gold"},{op="poly",sides=6,r=0.55,color="brown",alpha=0.9},{op="circle",r=0.2,color="white"}]

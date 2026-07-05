@@ -1,0 +1,19 @@
+# Triceratops - the Lost World ELITE (mirrored pair): a massive charging bruiser. Lunges at
+# the player AND fires the recursive `comet` emitter (trailing debris). Tanky finale miniboss.
+name="Triceratops"
+sprite="sprites/06_dino/triceratops.png"
+flavor="Three horns, zero negotiations."
+move="lunge"
+move_params={ creep_mul=0.5, trigger_dist=300, lunge_mul=4.2, lunge_dur=0.6, recover_dur=1.0 }
+fire="spread"
+emitter="comet"
+elite=true
+death_burst=18
+hp=620
+speed=26
+radius=32
+fire_interval=1.4
+min_stage=2
+color="brown"
+xp=65
+shape=[{op="poly",sides=6,r=1.0,color="body",outline="gold"},{op="poly",sides=3,r=0.6,color="khaki",spin_offset=90,alpha=0.9},{op="circle",r=0.25,color="white"}]

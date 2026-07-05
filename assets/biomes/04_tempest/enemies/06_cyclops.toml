@@ -1,0 +1,18 @@
+# Cyclone - the Tempest ELITE (mirrored pair): fires the recursive `splitter` emitter (aimed
+# darts that burst into rings). Storm-clad miniboss.
+name="Storm Cyclops"
+sprite="sprites/04_tempest/storm_cyclops.png"
+flavor="One eye, all of it lightning."
+move="hover"
+move_params={ strafe_freq=0.7, strafe_amp=1.6 }
+fire="aimed"
+emitter="splitter"
+elite=true
+hp=520
+speed=24
+radius=29
+fire_interval=1.4
+min_stage=2
+color="gold"
+xp=60
+shape=[{op="poly",sides=8,r=1.0,color="body",spin=30},{op="ring",r=0.74,thick=0.18,color="white",alpha=0.9},{op="circle",r=0.3,color="white"}]

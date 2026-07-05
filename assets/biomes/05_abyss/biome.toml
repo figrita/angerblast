@@ -1,0 +1,29 @@
+# 05_abyss - The Abyss. A deep-sea world rendered abstractly: near-black water, faint
+# bioluminescent motes, slow lurking creatures that drift then strike. Eerie, patient pressure
+# rather than a swarm — punctuated by anglerfish lunges out of the dark.
+name = "The Abyss"
+
+[theme]
+bullet_color = "coral"
+gem_color = "gold"
+background = "black"
+star_colors = ["nightteal", "deepteal", "teal"]
+
+[director]
+field_cap_base = 30
+field_cap_per_stage = 30
+field_cap_max = 560
+wave_interval_base = 10.5      # slower cadence — patient, lurking deep-sea feel
+waves_to_boss = 12
+formations = ["stream", "vee", "swarm"]
+
+[boss]
+name = "The Leviathan"
+sprite="sprites/05_abyss/boss.png"
+hp = 1800
+radius = 60
+phases = [
+  { hp_above = 0.6, fire = "ring",   count = 12 },
+  { hp_above = 0.3, fire = "spiral", count = 5, plus = "flower" },
+  { hp_above = 0.0, fire = "ring",   count = 20, plus = "flower" },
+]

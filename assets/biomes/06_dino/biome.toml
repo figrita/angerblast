@@ -1,0 +1,60 @@
+# 06_dino - Lost World. A dinosaur world rendered abstractly: earthy jungle palette, and a
+# roster that's MELEE-aggressive — charging raptors (lunge), stomping bruisers (heavy descent +
+# debris bursts), pterodactyl swoopers. Physical, in-your-face; the new lunge/swoop mechanics
+# define the biome. The grand-finale multi-part boss: a T-rex head + two clawing hands.
+name = "Lost World"
+
+[theme]
+bullet_color = "hotpink"
+gem_color = "palecyan"
+background = "umber"
+star_colors = ["olivedk", "olive", "leaf"]
+
+[director]
+field_cap_base = 38
+field_cap_per_stage = 40
+field_cap_max = 680
+wave_interval_base = 8.5
+waves_to_boss = 14
+formations = ["vee", "grid", "swarm", "stream"]
+
+[boss]
+name = "Tyrant King"
+hp = 2000
+radius = 60
+phases = [
+  { hp_above = 0.0, fire = "spread", count = 7 },
+]
+# T-rex: a roaring head flanked by two clawing hands. Head shielded until the claws fall.
+[[boss.part]]
+sprite="sprites/06_dino/boss_head.png"
+head = true
+off_y = -14
+hp = 1400
+radius = 52
+fire = "spread"
+count = 9
+interval = 1.1
+color = "olive"
+
+[[boss.part]]
+sprite="sprites/06_dino/boss_hand.png"
+off_x = -150
+off_y = 50
+hp = 520
+radius = 34
+fire = "aimed"
+count = 5
+interval = 1.0
+color = "clay"
+
+[[boss.part]]
+sprite="sprites/06_dino/boss_hand.png"
+off_x = 150
+off_y = 50
+hp = 520
+radius = 34
+fire = "aimed"
+count = 5
+interval = 1.0
+color = "clay"

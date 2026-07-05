@@ -1,0 +1,16 @@
+# Thunderhead - hovering storm-cell firing a rotating spiral. Steady mid-screen pressure.
+name="Thunderhead"
+sprite="sprites/04_tempest/thunderhead.png"
+flavor="A pocket storm cloud that carries its own artillery."
+move="hover"
+move_params={ strafe_freq=0.9, strafe_amp=2.2 }
+fire="spiral"
+fire_params={ count=3, speed_scale=0.9, arc=6.28319, spin=0.3, aimed=false, color="gold" }
+hp=26
+speed=24
+radius=15
+fire_interval=1.15
+min_stage=2
+color="gold"
+xp=4
+shape=[{op="poly",sides=5,r=1.0,color="body",spin=45},{op="poly",sides=5,r=0.6,color="lavender",alpha=0.8,spin=-30},{op="circle",r=0.25,color="white",alpha=0.9}]

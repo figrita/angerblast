@@ -1,0 +1,15 @@
+# Hatchling - a jungle remix of the Popcorn: brisk straight-down swarm filler, leaf-tinted,
+# slightly tougher. Cheap pressure that fills the gaps between the big melee threats.
+name="Hatchling"
+sprite="sprites/06_dino/hatchling.png"
+flavor="Fresh from the egg, faster than it has any right to be."
+move="straight"
+fire="none"
+hp=6
+speed=88
+radius=8
+fire_interval=0.0
+min_stage=1
+color="leaf"
+xp=1
+shape=[{op="circle",r=1.0,color="body"},{op="circle",r=0.35,color="gold",alpha=0.6}]

@@ -1,0 +1,16 @@
+# Sleet - a SWOOPER: arcs across the screen toward the player while descending. Fast, evasive.
+name="Sleetshade"
+sprite="sprites/03_frost/sleetshade.png"
+flavor="A cold ghost that arrives sideways."
+move="swoop"
+move_params={ fall_mul=0.9, arc_rate=2.6, arc_amp=3.0 }
+fire="none"
+death_burst=4
+hp=10
+speed=52
+radius=11
+fire_interval=0.0
+min_stage=1
+color="palecyan"
+xp=2
+shape=[{op="poly",sides=3,r=1.0,color="body",spin_offset=90},{op="circle",r=0.3,color="white",alpha=0.6}]

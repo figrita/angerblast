@@ -1,0 +1,33 @@
+# emitters.toml - the composable danmaku graph. Each [[emitter]] is a named burst; a bullet
+# it spawns can carry a CHILD emitter (referenced BY NAME) that runs on a timer or on death,
+# so "bullets that split / trail / burst" are pure data. This is NOT a scripting VM: emitters
+# reference each other only by name, the engine walks the graph, and runaway is bounded by a
+# depth cap (EMITTER_MAX_DEPTH=4) + the bullet pool. Every child ref is validated at load.
+#
+# Fields:
+#   name            unique name (referenced by enemies/bosses via `emitter=`, and as a child)
+#   count / count_per_stage   bullets per burst (+per stage)
+#   speed_scale     x the base speed the caller supplies
+#   arc             fan span (rad); 6.28319 = full ring
+#   spin            rad added to the rotating phase each burst
+#   aimed           true = fan centred on the player
+#   radius / color  bullet look
+#   child           name of the emitter each spawned bullet carries (optional)
+#   child_mode      "timer" (fire child every child_interval s) | "death" (fire once on expiry)
+#   child_interval  seconds between timer bursts
+#   child_speed     base speed handed to the child burst
+# NOTE: tomlc99 forbids newlines inside an inline table, so each emitter is one line.
+
+emitter = [
+  # a small aimed dart that, on death, bursts into a ring (classic "splitter")
+  { name="burst_ring", count=8, arc=6.28319, speed_scale=1.0, radius=5, color="hotpink" },
+  { name="splitter",   count=3, arc=0.5, aimed=true, speed_scale=1.1, radius=6, color="coral", child="burst_ring", child_mode="death", child_speed=90 },
+
+  # a slow descending wave that trails little spark bullets as it travels (timer child)
+  { name="trail_spark", count=1, arc=0, speed_scale=0.4, radius=3, color="gold" },
+  { name="comet",       count=5, arc=2.4, speed_scale=1.0, radius=7, color="peach", child="trail_spark", child_mode="timer", child_interval=0.12, child_speed=60 },
+
+  # a rotating spiral whose arms themselves shed a ring on death (two-level recursion)
+  { name="mini_ring",   count=8, arc=6.28319, speed_scale=0.9, radius=4, color="sky" },
+  { name="spiral_pods", count=3, arc=6.28319, spin=0.3, speed_scale=0.9, radius=6, color="azure", child="mini_ring", child_mode="death", child_speed=80 },
+]

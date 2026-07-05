@@ -1,0 +1,16 @@
+# Gust - fast swooper that knifes across the storm. Erratic, evasive, light.
+name="Zephyrling"
+sprite="sprites/04_tempest/zephyrling.png"
+flavor="A small wind with a smaller temper."
+move="swoop"
+move_params={ fall_mul=1.0, arc_rate=3.2, arc_amp=3.4 }
+fire="none"
+death_burst=4
+hp=12
+speed=60
+radius=10
+fire_interval=0.0
+min_stage=1
+color="aquabrt"
+xp=2
+shape=[{op="poly",sides=3,r=1.0,color="body",spin_offset=90},{op="poly",sides=3,r=0.55,color="lavender",alpha=0.7,spin_offset=90},{op="circle",r=0.2,color="white",alpha=0.9}]

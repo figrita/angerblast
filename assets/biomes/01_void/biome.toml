@@ -1,0 +1,27 @@
+# 01_void - the starting biome. A biome is a folder: this metadata + an enemies/ folder.
+name = "The Void"
+
+[theme]
+bullet_color = "pinkred"
+gem_color = "gold"
+background = "black"
+star_colors = ["navy", "indigo", "periwinkle"]
+
+[director]
+field_cap_base = 60
+field_cap_per_stage = 20
+field_cap_max = 400
+wave_interval_base = 12.0
+waves_to_boss = 9
+formations = ["row", "vee", "stream", "grid", "swarm"]
+
+[boss]
+name = "Null Maw"
+sprite="sprites/01_void/boss.png"
+hp = 600
+radius = 46
+phases = [
+  { hp_above = 0.66, fire = "aimed", count = 5 },
+  { hp_above = 0.33, fire = "aimed", count = 7, plus = "flower" },
+  { hp_above = 0.0,  fire = "aimed", count = 10, plus = "flower" },
+]

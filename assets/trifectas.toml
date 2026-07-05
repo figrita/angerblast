@@ -1,0 +1,62 @@
+# trifectas.toml - the 12 named rune combos. `counts` is [red, blue, green, yellow, purple]
+# and must sum to 3. Matching is order-independent.
+
+[[trifecta]]
+name = "Inferno"
+sprite = "sprites/common/tri_inferno.png"
+counts = [3, 0, 0, 0, 0]   # RRR
+
+[[trifecta]]
+name = "Stream"
+sprite = "sprites/common/tri_stream.png"
+counts = [0, 3, 0, 0, 0]   # BBB
+
+[[trifecta]]
+name = "Swarm"
+sprite = "sprites/common/tri_swarm.png"
+counts = [0, 0, 3, 0, 0]   # GGG
+
+[[trifecta]]
+name = "Blitz"
+sprite = "sprites/common/tri_blitz.png"
+counts = [0, 0, 0, 3, 0]   # YYY
+
+[[trifecta]]
+name = "Lance"
+sprite = "sprites/common/tri_lance.png"
+counts = [0, 0, 0, 0, 3]   # PPP
+
+[[trifecta]]
+name = "Napalm"
+sprite = "sprites/common/tri_napalm.png"
+counts = [2, 0, 0, 1, 0]   # RRY
+
+[[trifecta]]
+name = "Scatter"
+sprite = "sprites/common/tri_scatter.png"
+counts = [1, 0, 2, 0, 0]   # GGR
+
+[[trifecta]]
+name = "Railgun"
+sprite = "sprites/common/tri_railgun.png"
+counts = [0, 2, 0, 0, 1]   # BBP
+
+[[trifecta]]
+name = "Tempest"
+sprite = "sprites/common/tri_tempest.png"
+counts = [0, 0, 1, 2, 0]   # YYG
+
+[[trifecta]]
+name = "Void"
+sprite = "sprites/common/tri_void.png"
+counts = [1, 0, 0, 0, 2]   # PPR
+
+[[trifecta]]
+name = "Prism"
+sprite = "sprites/common/tri_prism.png"
+counts = [1, 1, 1, 0, 0]   # RGB
+
+[[trifecta]]
+name = "Chaos"
+sprite = "sprites/common/tri_chaos.png"
+counts = [0, 1, 0, 1, 1]   # YPB

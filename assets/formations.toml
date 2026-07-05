@@ -1,0 +1,19 @@
+# formations.toml - the spawn director's formation SHAPES. The shape geometry (row/vee/
+# stream/grid/swarm) stays a C primitive; these numbers drive its counts, spacing, per-stage
+# scaling and caps. A biome's [director].formations list chooses WHICH of these it spawns.
+# Order matters: index = formation op id (0=row 1=vee 2=stream 3=grid 4=swarm).
+#
+# Slot meaning per shape (see spawn.c spawn_formation):
+#   row    : count, count_per_stage, count_max, rows, margin, row_gap
+#   vee    : per, per_per_stage, per_max, dx_step, y_top_step, y_anchor_step
+#   stream : lanes, lanes_div(stage/div), lanes_max, count, count_max, y_step
+#   grid   : cols, cols_div(stage/div), cols_max, rows, margin, row_gap
+#   swarm  : count, count_per_stage, count_max
+
+formation = [
+  { op="row",    count=10, count_per_stage=1, count_max=18, rows=2, margin=80, row_gap=40 },
+  { op="vee",    per=6,  per_per_stage=1, per_max=11, dx_step=36, y_top_step=26, y_anchor_step=22 },
+  { op="stream", lanes=2, lanes_div=2, lanes_max=3, count=10, count_max=20, y_step=30 },
+  { op="grid",   cols=7, cols_div=2, cols_max=11, rows=4, margin=80, row_gap=40 },
+  { op="swarm",  count=18, count_per_stage=3, count_max=55 },
+]

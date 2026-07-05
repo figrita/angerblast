@@ -1,0 +1,14 @@
+# Shard - a fast diamond with cross spokes (new geometry: line ops)
+name="Slagshard"
+sprite="sprites/02_ember/slagshard.png"
+flavor="Molten shrapnel that never learned to slow down."
+move="straight"
+fire="none"
+hp=6
+speed=95
+radius=10
+fire_interval=0.0
+min_stage=1
+color="gold"
+xp=1
+shape=[{op="poly",sides=4,r=1.0,color="body",spin=120},{op="line",x1=-1.0,y1=0.0,x2=1.0,y2=0.0,thick=0.12,color="white"},{op="line",x1=0.0,y1=-1.0,x2=0.0,y2=1.0,thick=0.12,color="white"}]

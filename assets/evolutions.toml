@@ -1,0 +1,360 @@
+# evolutions.toml - the weapon x trifecta evolution matrix.
+# [mods.<trifecta>] = the shared stat/behaviour preset for that trifecta column.
+# [[row]] per weapon (WeaponId order) = 12 {name, desc} for that weapon's evolutions.
+# special: none explode beam swarm rapid pierceall burn shotgun rail storm voidpull prism chaos
+# on_kill: none magnet chain shield bounty frag reignite
+# on_hit_effect/aura_effect: none slow burn poison freeze shock weaken mark goo
+
+[mods.inferno]
+damage_mul = 2.0
+rate_mul = 0.95
+size_mul = 1.3
+multi_add = 0
+pierce_add = 1
+special = "explode"
+on_hit_effect = "none"
+on_hit_mag = 0
+on_kill = "chain"
+aura_effect = "none"
+
+[mods.stream]
+damage_mul = 1.4
+rate_mul = 0.85
+size_mul = 1.0
+multi_add = 0
+pierce_add = 3
+special = "beam"
+on_hit_effect = "slow"
+on_hit_mag = 0.35
+on_kill = "none"
+aura_effect = "none"
+
+[mods.swarm]
+damage_mul = 1.2
+rate_mul = 0.90
+size_mul = 1.0
+multi_add = 4
+pierce_add = 0
+special = "swarm"
+on_hit_effect = "none"
+on_hit_mag = 0
+on_kill = "magnet"
+aura_effect = "none"
+
+[mods.blitz]
+damage_mul = 1.3
+rate_mul = 0.45
+size_mul = 1.0
+multi_add = 0
+pierce_add = 0
+special = "rapid"
+on_hit_effect = "shock"
+on_hit_mag = 0
+on_kill = "none"
+aura_effect = "none"
+
+[mods.lance]
+damage_mul = 1.6
+rate_mul = 0.90
+size_mul = 1.1
+multi_add = 0
+pierce_add = 99
+special = "pierceall"
+on_hit_effect = "none"
+on_hit_mag = 0
+on_kill = "none"
+aura_effect = "none"
+
+[mods.napalm]
+damage_mul = 1.7
+rate_mul = 0.95
+size_mul = 1.2
+multi_add = 0
+pierce_add = 0
+special = "burn"
+on_hit_effect = "burn"
+on_hit_mag = 14.0
+on_kill = "reignite"
+aura_effect = "none"
+
+[mods.scatter]
+damage_mul = 1.3
+rate_mul = 1.05
+size_mul = 1.0
+multi_add = 5
+pierce_add = 1
+special = "shotgun"
+on_hit_effect = "none"
+on_hit_mag = 0
+on_kill = "frag"
+aura_effect = "none"
+
+[mods.railgun]
+damage_mul = 3.0
+rate_mul = 1.30
+size_mul = 1.6
+multi_add = 0
+pierce_add = 99
+special = "rail"
+on_hit_effect = "none"
+on_hit_mag = 0
+on_kill = "none"
+aura_effect = "none"
+
+[mods.tempest]
+damage_mul = 1.35
+rate_mul = 0.55
+size_mul = 1.0
+multi_add = 2
+pierce_add = 1
+special = "storm"
+on_hit_effect = "none"
+on_hit_mag = 0
+on_kill = "bounty"
+aura_effect = "none"
+
+[mods.void]
+damage_mul = 2.2
+rate_mul = 1.00
+size_mul = 1.4
+multi_add = 0
+pierce_add = 4
+special = "voidpull"
+on_hit_effect = "weaken"
+on_hit_mag = 0.4
+on_kill = "none"
+aura_effect = "none"
+
+[mods.prism]
+damage_mul = 1.6
+rate_mul = 0.85
+size_mul = 1.1
+multi_add = 2
+pierce_add = 1
+special = "prism"
+on_hit_effect = "none"
+on_hit_mag = 0
+on_kill = "shield"
+aura_effect = "none"
+
+[mods.chaos]
+damage_mul = 1.8
+rate_mul = 0.80
+size_mul = 1.1
+multi_add = 3
+pierce_add = 1
+special = "chaos"
+on_hit_effect = "poison"
+on_hit_mag = 6.0
+on_kill = "none"
+aura_effect = "none"
+
+# --- name/desc grid: one [[row]] per weapon, 12 evolutions each (trifecta order) ---
+[[row]]   # WP_MAINGUN
+evo = [
+  {name="Inferno Lance", desc="bolts detonate on impact", pierce_add=2},
+  {name="Star Stream", desc="long piercing light-beam", pierce_add=5},
+  {name="Buckshot Array", desc="fans a wall of bolts", multi_add=5},
+  {name="Gatling Core", desc="blistering fire rate", rate_mul=0.38},
+  {name="Impaler", desc="pierces the whole column", damage_mul=2.3},
+  {name="Cinderfall", desc="leaves a burning trail", on_hit_mag=16},
+  {name="Scatterblast", desc="wide pellet burst", multi_add=6},
+  {name="Railspike", desc="one huge piercing slug", damage_mul=3.4},
+  {name="Squall", desc="dense fast spray", rate_mul=0.5},
+  {name="Nullspear", desc="heavy void-charged pierce", pierce_add=6},
+  {name="Prism Driver", desc="rainbow tri-shot", multi_add=3},
+  {name="Wild Volley", desc="erratic homing bolts", on_hit_mag=8},
+]
+
+[[row]]   # WP_SIDEGUN
+evo = [
+  {name="Twin Infernos", desc="side blasts explode", multi_add=1},
+  {name="Lateral Lasers", desc="piercing side-beams", size_mul=1.3},
+  {name="Flank Swarm", desc="walls of side shots", multi_add=6},
+  {name="Side Gatlings", desc="machine-gun flanks", rate_mul=0.4},
+  {name="Wing Lances", desc="side shots pierce all", size_mul=1.2},
+  {name="Ember Wings", desc="burning side trails", multi_add=1},
+  {name="Flak Wings", desc="spread side flak", multi_add=7},
+  {name="Beam Outriggers", desc="huge side rails", size_mul=1.8},
+  {name="Crosswind", desc="fast dense flanks", multi_add=3},
+  {name="Void Wings", desc="heavy void flanks", on_hit_mag=0.5},
+  {name="Prism Wings", desc="rainbow side fan", multi_add=3},
+  {name="Mad Flanks", desc="chaotic side scatter", multi_add=4},
+]
+
+[[row]]   # WP_TAILGUN
+evo = [
+  {name="Backfire", desc="rear shots detonate", rate_mul=0.75},
+  {name="Tail Beam", desc="piercing rear lance", damage_mul=1.7},
+  {name="Rear Swarm", desc="wall of rear shots", multi_add=5},
+  {name="Afterburner", desc="rapid rear fire", rate_mul=0.35},
+  {name="Tail Lance", desc="rear pierces all", damage_mul=1.7},
+  {name="Scorch Trail", desc="burning wake", rate_mul=0.85},
+  {name="Tailflak", desc="rear spread burst", multi_add=6},
+  {name="Tail Rail", desc="massive rear slug", damage_mul=3.2},
+  {name="Slipstream", desc="dense rear spray", rate_mul=0.5, multi_add=3},
+  {name="Void Wake", desc="heavy rear pierce", damage_mul=2.4},
+  {name="Prism Tail", desc="rainbow rear fan", damage_mul=1.7},
+  {name="Tailspin", desc="chaotic rear scatter", rate_mul=0.7},
+]
+
+[[row]]   # WP_HOMING
+evo = [
+  {name="Cluster Seekers", desc="missiles explode", on_kill="frag"},
+  {name="Lance Seekers", desc="fast piercing seekers", rate_mul=0.7},
+  {name="Locust Swarm", desc="huge missile cloud", multi_add=7},
+  {name="Rapid Seekers", desc="missile machine-gun", rate_mul=0.5, multi_add=1},
+  {name="Drillheads", desc="seekers pierce all", rate_mul=0.8},
+  {name="Napalm Seekers", desc="seekers leave fire", on_hit_mag=18},
+  {name="Frag Seekers", desc="seekers burst on hit", multi_add=5},
+  {name="Heavy Seeker", desc="one giant rocket", damage_mul=3.6, rate_mul=1.5},
+  {name="Hornet Storm", desc="fast dense seekers", multi_add=3},
+  {name="Void Seekers", desc="void-heavy seekers", on_hit_effect="mark"},
+  {name="Prism Seekers", desc="rainbow seekers", multi_add=3},
+  {name="Mad Seekers", desc="wildly homing swarm", multi_add=4},
+]
+
+[[row]]   # WP_LIGHTNING
+evo = [
+  {name="Thunderburst", desc="zaps detonate", on_hit_effect="shock"},
+  {name="Arc Beam", desc="continuous lightning lance", multi_add=1},
+  {name="Chain Storm", desc="arcs to many targets", multi_add=2},
+  {name="Tesla Rapid", desc="rapid-fire zaps", rate_mul=0.42},
+  {name="Lance Bolt", desc="arc pierces all", multi_add=1},
+  {name="Plasma Burn", desc="zaps ignite enemies", on_hit_mag=16},
+  {name="Forked Arc", desc="splitting bolts", multi_add=3},
+  {name="Railbolt", desc="one devastating bolt", damage_mul=3.4},
+  {name="Storm Cell", desc="dense fast arcs", multi_add=2},
+  {name="Void Arc", desc="heavy void lightning", on_hit_mag=0.5},
+  {name="Prism Arc", desc="rainbow chain", multi_add=2},
+  {name="Wild Surge", desc="erratic chains", on_hit_mag=8},
+]
+
+[[row]]   # WP_AURA
+evo = [
+  {name="Nova Field", desc="aura pulses explode", size_mul=1.7},
+  {name="Ray Field", desc="reaching aura beams", size_mul=1.4},
+  {name="Spore Field", desc="spreading damage cloud", size_mul=1.3},
+  {name="Pulse Field", desc="rapid aura ticks", rate_mul=0.4},
+  {name="Lance Field", desc="aura spikes outward", size_mul=1.5},
+  {name="Pyre Field", desc="burning ground aura", aura_effect="burn", on_hit_mag=12},
+  {name="Shard Field", desc="aura flings shards", on_kill="frag"},
+  {name="Rail Field", desc="focused aura beam", damage_mul=2.6, size_mul=2.0},
+  {name="Maelstrom", desc="fast wide aura", rate_mul=0.5},
+  {name="Void Field", desc="heavy void aura", aura_effect="weaken", on_hit_mag=0.35},
+  {name="Prism Field", desc="rainbow aura", size_mul=1.3},
+  {name="Chaos Field", desc="erratic aura bursts", aura_effect="poison", on_hit_mag=5},
+]
+
+[[row]]   # WP_ORBITAL
+evo = [
+  {name="Blast Orbs", desc="orbs explode on contact", damage_mul=2.6},
+  {name="Comet Orbs", desc="trailing orbital beams", on_hit_mag=0.5},
+  {name="Orb Swarm", desc="a cloud of orbs", multi_add=5, damage_mul=1.6},
+  {name="Buzzsaw Orbs", desc="fast-spinning orbs", damage_mul=1.5, size_mul=1.2},
+  {name="Lance Orbs", desc="orbs gore through all", damage_mul=1.9},
+  {name="Ember Orbs", desc="burning orbit trail", aura_effect="burn", on_hit_mag=10},
+  {name="Shrapnel Orbs", desc="orbs shed shards", on_kill="frag"},
+  {name="Wrecking Orb", desc="one massive orb", damage_mul=3.2, size_mul=2.2},
+  {name="Whirl Orbs", desc="dense fast orbit", multi_add=3, damage_mul=1.8, size_mul=1.2},
+  {name="Void Orbs", desc="heavy void orbs", damage_mul=2.5},
+  {name="Prism Orbs", desc="rainbow orbit", multi_add=3},
+  {name="Chaos Orbs", desc="wild orbit", multi_add=4},
+]
+
+[[row]]   # WP_AIMED
+evo = [
+  {name="Inferno Aim", desc="aimed shots detonate", rate_mul=0.85},
+  {name="Aim Beam", desc="piercing aimed lance", damage_mul=1.8},
+  {name="Aim Swarm", desc="aimed shot wall", multi_add=4},
+  {name="Aim Gatling", desc="rapid aimed fire", rate_mul=0.34},
+  {name="Aim Lance", desc="aimed pierces all", damage_mul=1.8},
+  {name="Aim Cinders", desc="aimed burning shots", on_hit_mag=16},
+  {name="Aim Scatter", desc="aimed spread burst", multi_add=6},
+  {name="Aim Rail", desc="aimed rail slug", damage_mul=3.4},
+  {name="Aim Storm", desc="dense aimed spray", rate_mul=0.5},
+  {name="Aim Void", desc="aimed void pierce", pierce_add=6},
+  {name="Aim Prism", desc="aimed rainbow", damage_mul=1.7},
+  {name="Aim Chaos", desc="aimed wild scatter", multi_add=3, on_hit_mag=7},
+]
+
+[[row]]   # WP_AUTOAIM
+evo = [
+  {name="Smart Inferno", desc="auto shots explode", damage_mul=2.2},
+  {name="Smart Beam", desc="auto piercing beam", pierce_add=4, damage_mul=1.7},
+  {name="Smart Swarm", desc="auto shot cloud", multi_add=5},
+  {name="Smart Gatling", desc="auto rapid fire", rate_mul=0.36},
+  {name="Smart Lance", desc="auto pierces all", rate_mul=0.85},
+  {name="Smart Burn", desc="auto burning shots", on_hit_mag=15},
+  {name="Smart Scatter", desc="auto spread burst", multi_add=5},
+  {name="Smart Rail", desc="auto rail slug", rate_mul=1.2},
+  {name="Smart Storm", desc="auto dense spray", rate_mul=0.52},
+  {name="Smart Void", desc="auto void pierce", damage_mul=2.4},
+  {name="Smart Prism", desc="auto rainbow", rate_mul=0.8},
+  {name="Smart Chaos", desc="auto wild scatter", rate_mul=0.75},
+]
+
+[[row]]   # WP_MISSILE
+evo = [
+  {name="Carpet Bombs", desc="missiles carpet-explode", multi_add=2},
+  {name="Missile Lance", desc="fast piercing rockets", rate_mul=0.7},
+  {name="Missile Swarm", desc="rocket barrage", multi_add=6},
+  {name="Rocket Rapid", desc="rocket machine-gun", rate_mul=0.45},
+  {name="Bunkerbuster", desc="rockets pierce all", damage_mul=1.8},
+  {name="Napalm Bombs", desc="rockets leave fire", on_hit_mag=26, damage_mul=2.0},
+  {name="Frag Rockets", desc="rockets fragment", multi_add=5},
+  {name="Megaton", desc="one colossal rocket", damage_mul=4.0, rate_mul=1.6},
+  {name="Rocket Storm", desc="dense fast rockets", multi_add=3},
+  {name="Void Rockets", desc="void-heavy rockets", size_mul=1.6},
+  {name="Prism Rockets", desc="rainbow rockets", damage_mul=1.7},
+  {name="Mad Rockets", desc="wildly homing rockets", multi_add=4},
+]
+
+[[row]]   # WP_FLAME
+evo = [
+  {name="Hellstorm", desc="flames erupt in bursts", on_hit_effect="burn", on_hit_mag=10},
+  {name="Flame Lance", desc="long piercing fire-jet", pierce_add=6},
+  {name="Firestorm", desc="huge flame cloud", multi_add=8},
+  {name="Blowtorch", desc="rapid flame pulses", rate_mul=0.4, on_hit_effect="burn", on_hit_mag=6},
+  {name="Flame Spear", desc="fire pierces all", size_mul=1.3},
+  {name="Napalm Spray", desc="spreads burning pools", on_hit_mag=22},
+  {name="Cinder Spray", desc="scattering embers", multi_add=9},
+  {name="Flame Rail", desc="focused fire-lance", damage_mul=2.8},
+  {name="Inferno Storm", desc="dense fast flames", rate_mul=0.5, damage_mul=2.2, multi_add=3},
+  {name="Void Flame", desc="heavy void fire", on_hit_mag=0.5},
+  {name="Prism Flame", desc="rainbow fire", multi_add=3},
+  {name="Wildfire", desc="erratic flame bursts", on_hit_mag=9},
+]
+
+[[row]]   # WP_GOO
+evo = [
+  {name="Volatile Goo", desc="wads burst on impact", on_hit_effect="goo"},
+  {name="Goo Lance", desc="streaking goo bolts", on_hit_mag=0.5},
+  {name="Goo Flood", desc="a flood of wads", multi_add=5},
+  {name="Goo Spray", desc="rapid-fire wads", rate_mul=0.5},
+  {name="Goo Spear", desc="piercing goo lance", size_mul=1.4},
+  {name="Tar Bomb", desc="huge sticky wads ignite", on_hit_mag=18, size_mul=1.4},
+  {name="Goo Burst", desc="scattering blobs", multi_add=6},
+  {name="Goo Cannon", desc="one massive blob", size_mul=2.0},
+  {name="Goo Storm", desc="dense fast blobs", multi_add=3},
+  {name="Void Goo", desc="heavy void wads", on_hit_mag=0.55},
+  {name="Prism Goo", desc="rainbow wads", size_mul=1.2},
+  {name="Chaos Goo", desc="wild blob scatter", on_hit_mag=9},
+]
+
+[[row]]   # WP_ION
+evo = [
+  {name="Annihilator", desc="ion blasts detonate", size_mul=2.0},
+  {name="Ion Lance", desc="endless piercing beam", damage_mul=2.1, rate_mul=0.7},
+  {name="Ion Swarm", desc="many ion bolts", multi_add=3},
+  {name="Ion Repeater", desc="rapid ion fire", rate_mul=0.5},
+  {name="Ion Spear", desc="ion pierces all", size_mul=1.8, damage_mul=2.0},
+  {name="Plasma Burn", desc="ion ignites the field", on_hit_mag=30, damage_mul=1.9},
+  {name="Ion Scatter", desc="splitting ion burst", multi_add=4},
+  {name="Ion Railgun", desc="one cataclysmic slug", damage_mul=4.2, rate_mul=1.5},
+  {name="Ion Storm", desc="dense fast ion", rate_mul=0.6},
+  {name="Void Cannon", desc="void-charged ion", damage_mul=2.6},
+  {name="Prism Cannon", desc="rainbow ion", damage_mul=1.7},
+  {name="Chaos Cannon", desc="wild ion scatter", multi_add=3, damage_mul=1.9},
+]
+

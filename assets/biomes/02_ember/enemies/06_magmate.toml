@@ -1,0 +1,19 @@
+# Magmate - a Robotron-style hunter that slowly steers toward the player and fires an
+# occasional aimed bolt. A pursuit/positioning threat; low fire volume (1.8s) so it's not a
+# bullet-spammer like Blaze — it makes you keep moving.
+name="Magma Stalker"
+sprite="sprites/02_ember/magma_stalker.png"
+flavor="Follows the smell of unburned things."
+move="hunt"
+move_params={ steer=0.035 }
+fire="aimed"
+fire_params={ count=1, speed_scale=1.1, aimed=true, color="crimson" }
+hp=18
+speed=36
+radius=12
+fire_interval=1.8
+min_stage=3
+color="crimson"
+xp=3
+shape=[{op="rect",w=2.0,h=0.8,color="body"},{op="rect",w=0.8,h=2.0,color="body"},{op="circle",r=0.4,color="gold",alpha=0.7}]
+lunge_every=2.8

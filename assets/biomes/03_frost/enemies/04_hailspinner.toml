@@ -1,0 +1,16 @@
+# Hailspinner - a hovering ring-spinner (a sane-cadence Blaze cousin: ~0.7s, not a flood).
+name="Hailspinner"
+sprite="sprites/03_frost/hailspinner.png"
+flavor="A cyclone of hail wound around a bad idea."
+move="hover"
+move_params={ strafe_freq=0.7, strafe_amp=1.8 }
+fire="ring"
+fire_params={ count=9, count_per_stage=0, speed_scale=1.0, arc=6.28319, spin=0.35, aimed=false, color="azure" }
+hp=22
+speed=24
+radius=14
+fire_interval=2.4
+min_stage=2
+color="azure"
+xp=4
+shape=[{op="poly",sides=6,r=1.0,color="body",spin=50},{op="circle",r=0.35,color="white",alpha=0.5}]

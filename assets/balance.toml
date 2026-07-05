@@ -1,0 +1,70 @@
+# balance.toml - all gameplay tuning. Edit and relaunch (or press F5 to hot-reload).
+# Every value here was a #define in balance.h; now it's loaded at runtime.
+
+[player]
+radius        = 11.0
+shield_max    = 35.0   # 50 -> 70: more effective HP stretches every run ~longer toward the
+                       # 15-25 min target band WITHOUT changing the difficulty-curve shape
+shield_delay  = 1.8    # recover sooner between hits (eases early; late hits outpace it anyway)
+shield_rate   = 10.0
+shield_hit    = 5.0    # shield drained per hit (~14 hits to break a full 70). Higher = each little
+                       # blast hurts more (was an implicit 1 = a near-free 70-hit sponge). Paired
+                       # with shield-refill-on-hull-hit, each of the 4 hearts is a fresh 14-hit buffer.
+armor_k       = 100.0  # Armor Plating DR half-point. reduction = armor/(armor+armor_k), so each
+                       # +20 armor stack gives DIMINISHING returns: 1 stack ~17%, 2 ~29%, 3 ~37%,
+                       # 5 ~50%. Never reaches 100%. Lower armor_k = each point of armor worth more.
+hp            = 4       # hull pips; a hull hit refills shield to full (a fresh buffer each heart)
+move_speed    = 320.0
+pickup_radius = 90.0
+fire_interval = 0.14
+bullet_damage = 6.0
+bullet_speed  = 620.0
+iframe        = 1.3
+accel         = 2600.0
+friction      = 0.84
+# barrel-roll dodge (Space / Shift / pad R1): a quick i-frame dash
+dodge_speed    = 900.0   # dash velocity during the roll
+dodge_time     = 0.28    # seconds the roll lasts
+dodge_iframe   = 0.40    # invincibility window (>= dodge_time so the whole roll is safe)
+dodge_cooldown = 0.9     # seconds before you can roll again
+
+[enemy_scaling]
+# Tougher enemies, with the LATE game scaling harder so a skilled pilot dies ~15-25 min in
+# (close, on-the-ropes) instead of becoming immortal. hp_quadratic + bullet density/speed per
+# stage are the late-game levers (they dominate at high stage); linear/base keep early game sane.
+# PRINCIPLE: base values keep EARLY game survivable; per_stage / quadratic terms carry the
+# LATE ramp so a skilled pilot dies ~15-25 min in. Don't inflate base (it walls stage 1-2).
+hp_linear       = 0.40    # * stage
+hp_quadratic    = 0.028   # * stage^2  — pulled down so stage 4 tanking isn't a wall
+speed_per_stage = 0.06    # * stage
+enemy_speed_mul = 1.30    # global enemy MOVE speed — swarm advances, but 1.5 was too relentless
+                          # once the aggressive lunge/swoop roster was added (walled stage ~4).
+bullet_base     = 75.0    # 112 -> 85: slower enemy bullets, bigger dodge windows (less "sniper")
+bullet_per_stage = 9.0     # the per-stage ramp still climbs from the lower base
+elite_hp_per_loop = 0.35   # elites gain +35% max hp per full biome-loop clear (loopCount 0 = none)
+elite_xp_per_loop = 0.25   # ...and +25% xp reward, so tougher loops are worth actually fighting for
+
+[director]
+# Wave cadence + field crowding. A wave arrives, you clear it, then a LULL (calm) before the
+# next — so combat has rhythm, not a relentless stream (lull logic lives in spawn.c). Field
+# crowding ramps with stage (per_stage) to carry late difficulty; the base stays gentle.
+field_cap_base      = 32    # gentle opening swarm (fresh level-1 ship); ramp carries late crowding
+field_cap_per_stage = 35    # the ramp does the late-game crowding instead
+field_cap_max       = 600   # 400 -> 600: let the late-game field actually saturate the screen
+wave_interval_base  = 9.0     # 12 -> 9: waves arrive a bit faster, so the field refills / pressures
+wave_interval_min_sub = 3.0   # 2 -> 3: late stages shave more off the interval (relentless late)
+boss_grace_seconds  = 8.0     # summon the boss even if a few stragglers linger
+waves_per_stage_base = 8      # + stage after each boss (was 4 -> bosses are a longer goal)
+
+[boss]
+hp_base      = 400.0   # + stage * hp_per_stage
+hp_per_stage = 350.0
+radius       = 46.0
+
+[xp]
+# Steep level curve so cards/power are earned, not handed out. With bosses no longer dumping
+# ~400 XP + a free level, this paces ~L7 entering stage 3 (was L11-12).
+# cumulative XP to reach: L5 ~250, L10 ~2700, L15 ~9000, L20 ~21000.
+base     = 9.0     # lower base = early levels arrive sooner -> build comes online before the
+                   # stage-2 swarm overwhelms a fresh ship (fixes the early death cluster)
+exponent = 1.9     # high exponent kept: late levels stay expensive, so the late ramp holds

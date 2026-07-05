@@ -1,0 +1,15 @@
+# Ember - an octagon with a glowing ring (new geometry: ring op + 8-gon)
+name="Cinder Wisp"
+sprite="sprites/02_ember/cinder_wisp.png"
+flavor="A stray spark with delusions of arson."
+move="drift"
+fire="aimed"
+fire_params={ count=1, speed_scale=1.0, aimed=true, color="coral" }
+hp=12
+speed=30
+radius=12
+fire_interval=2.0
+min_stage=1
+color="coral"
+xp=2
+shape=[{op="poly",sides=8,r=1.0,color="body",spin=20},{op="ring",r=0.75,thick=0.18,color="gold",alpha=0.8},{op="circle",r=0.3,color="white",alpha=0.6}]

@@ -1,0 +1,18 @@
+# Glaciator - the Frost ELITE: a mirrored-pair miniboss firing the composable spiral_pods
+# emitter. An ice-clad, tankier cousin of the Warden.
+name="Glaciator"
+sprite="sprites/03_frost/glaciator.png"
+flavor="The slow patience of ice, armed."
+move="hover"
+move_params={ strafe_freq=0.6, strafe_amp=1.4 }
+fire="aimed"
+emitter="spiral_pods"
+elite=true
+hp=420
+speed=22
+radius=28
+fire_interval=1.4
+min_stage=2
+color="midblue"
+xp=50
+shape=[{op="poly",sides=8,r=1.0,color="body",spin=20},{op="ring",r=0.74,thick=0.16,color="cyan",alpha=0.85},{op="poly",sides=8,r=0.45,color="white",alpha=0.4,spin=-30}]

@@ -1,0 +1,16 @@
+# Bomber
+name="Doomcyst"
+sprite="sprites/01_void/doomcyst.png"
+flavor="A bloated sac of misfortune. Bursts on principle."
+move="drift"
+fire="none"
+fire_params={ count=3, arc=0.44, speed_scale=1.0, aimed=true, color="coral" }
+hp=36
+speed=14
+radius=18
+fire_interval=0.0
+min_stage=3
+color="red"
+xp=4
+shape=[{op="poly",sides=6,r=1.0,color="body"},{op="circle",r=0.35,color="white",alpha=0.5}]
+death_burst=12

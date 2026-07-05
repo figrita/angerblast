@@ -1,0 +1,16 @@
+# Pterodon - a swooping flyer that arcs across the sky, occasionally screeching an aimed shot.
+name="Pterodon"
+sprite="sprites/06_dino/pterodon.png"
+flavor="Rides thermals you can't see toward a lunch it can."
+move="swoop"
+move_params={ fall_mul=0.9, arc_rate=2.5, arc_amp=3.6 }
+fire="aimed"
+fire_params={ count=1, speed_scale=1.0, aimed=true, color="khaki" }
+hp=16
+speed=54
+radius=13
+fire_interval=2.4
+min_stage=1
+color="khaki"
+xp=3
+shape=[{op="poly",sides=3,r=1.0,color="body",spin_offset=90},{op="rect",w=2.2,h=0.4,color="olivedk",alpha=0.8}]

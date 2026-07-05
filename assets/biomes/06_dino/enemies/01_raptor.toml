@@ -1,0 +1,17 @@
+# Raptor - fast pack hunter: creeps then LUNGES at the player repeatedly. Low hp, high
+# aggression, a claw-burst on death. Comes in numbers.
+name="Raptor"
+sprite="sprites/06_dino/raptor.png"
+flavor="Pack instincts, singular appetite. It lunges first."
+move="lunge"
+move_params={ creep_mul=0.7, trigger_dist=300, lunge_mul=4.5, lunge_dur=0.4, recover_dur=0.7 }
+fire="none"
+death_burst=3
+hp=14
+speed=50
+radius=11
+fire_interval=0.0
+min_stage=1
+color="leaf"
+xp=2
+shape=[{op="poly",sides=3,r=1.0,color="body",spin_offset=90},{op="poly",sides=3,r=0.4,color="gold",spin_offset=90,alpha=0.8}]

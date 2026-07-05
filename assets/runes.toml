@@ -1,0 +1,32 @@
+# runes.toml - the 5 socketable runes, in order (RED, BLUE, GREEN, YELLOW, PURPLE).
+# Each rune's stat effect is hardcoded in weapon_stats (engine), but its identity is data.
+
+[[rune]]
+name = "Ember"
+color = "coral"
+sprite = "sprites/common/rune_ember.png"
+stat = "+25% damage"
+
+[[rune]]
+name = "Frost"
+color = "azure"
+sprite = "sprites/common/rune_frost.png"
+stat = "+25% velocity"
+
+[[rune]]
+name = "Vine"
+color = "seagreen"
+sprite = "sprites/common/rune_vine.png"
+stat = "+1 projectile"
+
+[[rune]]
+name = "Spark"
+color = "gold"
+sprite = "sprites/common/rune_spark.png"
+stat = "+20% fire rate"
+
+[[rune]]
+name = "Void"
+color = "violet"
+sprite = "sprites/common/rune_void.png"
+stat = "+1 pierce"

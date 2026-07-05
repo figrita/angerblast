@@ -1,0 +1,16 @@
+# Cinderling - a Galaga-style diver: holds, then swoops at the player. A movement/contact
+# threat (not a bullet enemy) to balance Ember's bullet-heavy roster.
+name="Cinderling"
+sprite="sprites/02_ember/cinderling.png"
+flavor="Newly kindled and eager to prove it can burn."
+move="dive"
+move_params={ descend_mul=0.6, hold_time=1.0, dive_mul=1.9 }
+fire="none"
+hp=14
+speed=48
+radius=12
+fire_interval=0.0
+min_stage=1
+color="coral"
+xp=2
+shape=[{op="poly",sides=3,r=1.0,color="body",spin_offset=90},{op="ring",r=0.6,thick=0.16,color="gold",alpha=0.7}]

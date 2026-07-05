@@ -1,0 +1,112 @@
+{
+  "_meta_comment": "Krea2-turbo pixel-art workflow: generate -> detect pixel grid -> downscale to true 1:1 pixel resolution -> quantize to BLK NX64 palette. API format for POST /prompt; also importable in the ComfyUI frontend (Workflow > Import). Placeholders {PROMPT} {SEED} {WIDTH} {HEIGHT} {PREFIX} are filled by spritegen.py.",
+  "10": {
+    "class_type": "UNETLoader",
+    "_meta": { "title": "Load Krea 2 Turbo" },
+    "inputs": { "unet_name": "krea2_turbo_fp8_scaled.safetensors", "weight_dtype": "default" }
+  },
+  "11": {
+    "class_type": "CLIPLoader",
+    "_meta": { "title": "Load Qwen3-VL text encoder (krea2)" },
+    "inputs": { "clip_name": "qwen3vl_4b_fp8_scaled.safetensors", "type": "krea2", "device": "default" }
+  },
+  "12": {
+    "class_type": "VAELoader",
+    "_meta": { "title": "Load Qwen Image VAE" },
+    "inputs": { "vae_name": "qwen_image_vae.safetensors" }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "_meta": { "title": "Pixel-art prompt" },
+    "inputs": { "text": "{PROMPT}", "clip": ["11", 0] }
+  },
+  "13": {
+    "class_type": "ConditioningZeroOut",
+    "_meta": { "title": "Negative (zeroed)" },
+    "inputs": { "conditioning": ["6", 0] }
+  },
+  "5": {
+    "class_type": "EmptyLatentImage",
+    "_meta": { "title": "Latent" },
+    "inputs": { "width": "{WIDTH}", "height": "{HEIGHT}", "batch_size": 1 }
+  },
+  "3": {
+    "class_type": "KSampler",
+    "_meta": { "title": "Krea2 turbo sample (8 steps, cfg 1)" },
+    "inputs": {
+      "seed": "{SEED}",
+      "steps": 8,
+      "cfg": 1.0,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1.0,
+      "model": ["10", 0],
+      "positive": ["6", 0],
+      "negative": ["13", 0],
+      "latent_image": ["5", 0]
+    }
+  },
+  "8": {
+    "class_type": "VAEDecode",
+    "_meta": { "title": "Decode" },
+    "inputs": { "samples": ["3", 0], "vae": ["12", 0] }
+  },
+  "20": {
+    "class_type": "PixelArtDetectorToImage",
+    "_meta": { "title": "Detect pixel grid + downscale to 1:1" },
+    "inputs": { "images": ["8", 0], "reduce_palette": false, "reduce_palette_max_colors": 128 }
+  },
+  "21": {
+    "class_type": "PixelArtLoadPalettes",
+    "_meta": { "title": "BLK NX64 palette" },
+    "inputs": {
+      "image": "blk-nx64.png",
+      "render_all_palettes_in_grid": false,
+      "grid_settings": "",
+      "paletteList_grid_font_size": 40,
+      "paletteList_grid_font_color": "#f40e12",
+      "paletteList_grid_background": "#fff",
+      "paletteList_grid_cols": 6,
+      "paletteList_grid_add_border": true,
+      "paletteList_grid_border_width": 3
+    }
+  },
+  "22": {
+    "class_type": "PixelArtDetectorConverter",
+    "_meta": { "title": "Quantize to BLK NX64 (exact nearest-color)" },
+    "inputs": {
+      "images": ["20", 0],
+      "paletteList": ["21", 0],
+      "palette": "GAMEBOY",
+      "resize_w": 0,
+      "resize_h": 0,
+      "resize_type": "contain",
+      "pixelize": "NP.quantize",
+      "grid_pixelate_grid_scan_size": 2,
+      "reduce_colors_before_palette_swap": false,
+      "reduce_colors_method": "Image.quantize",
+      "reduce_colors_max_colors": 128,
+      "apply_pixeldetector_max_colors": true,
+      "image_quantize_reduce_method": "MAXCOVERAGE",
+      "opencv_settings": "",
+      "opencv_kmeans_centers": "RANDOM_CENTERS",
+      "opencv_kmeans_attempts": 10,
+      "opencv_criteria_max_iterations": 10,
+      "pycluster_kmeans_metrics": "EUCLIDEAN_SQUARE",
+      "cleanup": "",
+      "cleanup_colors": false,
+      "cleanup_pixels_threshold": 0.02,
+      "dither": "none"
+    }
+  },
+  "29": {
+    "class_type": "SaveImage",
+    "_meta": { "title": "Save pixel-art" },
+    "inputs": { "filename_prefix": "{PREFIX}", "images": ["22", 0] }
+  },
+  "30": {
+    "class_type": "SaveImage",
+    "_meta": { "title": "Save raw decode (for exact-resolution regridding)" },
+    "inputs": { "filename_prefix": "{PREFIX}_raw", "images": ["8", 0] }
+  }
+}

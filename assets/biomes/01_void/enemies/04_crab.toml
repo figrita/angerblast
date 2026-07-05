@@ -1,0 +1,16 @@
+# Crab
+name="Scuttlemaw"
+sprite="sprites/01_void/scuttlemaw.png"
+flavor="Sidles the starfield edge-on, all armor and appetite."
+move="crab"
+move_params={ fall_mul=0.6, wave_freq=1.5, wave_amp=2.5 }
+fire="none"
+death_burst=3
+hp=10
+speed=30
+radius=13
+fire_interval=0.0
+min_stage=1
+color="turquoise"
+xp=2
+shape=[{op="poly",sides=6,r=1.0,color="body"},{op="circle",r=0.35,color="white",alpha=0.5}]

@@ -1,0 +1,17 @@
+# Anglerfish - lurks, creeping in the dark, then LUNGES out at the player with a heavy burst.
+# The signature abyss scare: slow approach, sudden strike.
+name="Anglerfish"
+sprite="sprites/05_abyss/anglerfish.png"
+flavor="The dark's own lure, with the dark's own teeth."
+move="lunge"
+move_params={ creep_mul=0.35, trigger_dist=230, lunge_mul=4.2, lunge_dur=0.5, recover_dur=1.4 }
+fire="none"
+death_burst=12
+hp=54
+speed=30
+radius=19
+fire_interval=0.0
+min_stage=2
+color="abyss"
+xp=5
+shape=[{op="circle",r=1.0,color="body"},{op="poly",sides=3,r=0.5,color="gold",spin_offset=90,alpha=0.9},{op="circle",r=0.2,color="white"}]

@@ -1,0 +1,15 @@
+# Diver
+name="Void Talon"
+sprite="sprites/01_void/void_talon.png"
+flavor="Folds its wings and plunges the moment you look away."
+move="dive"
+move_params={ descend_mul=0.6, hold_time=1.2, dive_mul=1.6 }
+fire="none"
+hp=8
+speed=44
+radius=12
+fire_interval=0.0
+min_stage=1
+color="peach"
+xp=1
+shape=[{op="poly",sides=3,r=1.0,color="body",spin_offset=90},{op="circle",r=0.35,color="white",alpha=0.5}]

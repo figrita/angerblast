@@ -1,0 +1,17 @@
+# Siphonophore - a spiral descender that corkscrews down trailing aimed shots (a long drifting
+# colony). Hard-to-read path through the dark.
+name="Siphonophore"
+sprite="sprites/05_abyss/siphonophore.png"
+flavor="Not one animal but a parliament, all voting to eat you."
+move="spiral"
+move_params={ fall_mul=0.6, spin_rate=2.6, radius=90 }
+fire="aimed"
+fire_params={ count=1, speed_scale=0.85, aimed=true, color="aqua" }
+hp=20
+speed=26
+radius=12
+fire_interval=1.7
+min_stage=3
+color="aqua"
+xp=4
+shape=[{op="poly",sides=4,r=1.0,color="body",spin=80},{op="circle",r=0.35,color="aquabrt",alpha=0.7}]

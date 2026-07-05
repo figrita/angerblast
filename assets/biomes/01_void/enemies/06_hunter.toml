@@ -1,0 +1,17 @@
+# Hunter
+name="Gazehound"
+sprite="sprites/01_void/gazehound.png"
+flavor="It has your scent now. Walls will not help."
+move="hunt"
+move_params={ steer=0.04 }
+fire="none"
+death_burst=4
+hp=14
+speed=34
+radius=12
+fire_interval=0.0
+min_stage=2
+color="magenta"
+xp=2
+shape=[{op="rect",w=2.0,h=0.8,color="body"},{op="rect",w=0.8,h=2.0,color="body"},{op="circle",r=0.35,color="white",alpha=0.5}]
+lunge_every=2.4

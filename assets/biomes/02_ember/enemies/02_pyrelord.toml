@@ -1,0 +1,18 @@
+# Pyrelord - an ELITE (miniboss) for the Ember biome. Mirrored pair; fires the composable
+# `comet` emitter (slow shots that trail spark bullets), plus a heavy aura.
+name="Pyrelord"
+sprite="sprites/02_ember/pyrelord.png"
+flavor="Nobility of the burning court; its retinue is the fire itself."
+move="hover"
+move_params={ strafe_freq=0.5, strafe_amp=1.2 }
+fire="spread"
+emitter="comet"
+elite=true
+hp=420
+speed=20
+radius=28
+fire_interval=1.1
+min_stage=1
+color="crimson"
+xp=55
+shape=[{op="poly",sides=6,r=1.0,color="body",spin=15},{op="ring",r=0.78,thick=0.2,color="gold",alpha=0.85},{op="circle",r=0.35,color="white",alpha=0.6}]

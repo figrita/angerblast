@@ -1,0 +1,17 @@
+# Frost Grunt - an ICE-tinted, beefier remix of the Void Grunt (march). Same behaviour, more
+# hp + bigger + cold palette: cheap variety for a later biome.
+name="Frosthusk"
+sprite="sprites/03_frost/frosthusk.png"
+flavor="A marching shell of ice; something old walks inside it."
+move="march"
+move_params={ step_mul=1.1, edge_margin=40, row_drop=28, settle_speed=7 }
+fire="none"
+death_burst=4
+hp=16
+speed=30
+radius=13
+fire_interval=0.0
+min_stage=1
+color="ice"
+xp=2
+shape=[{op="rect",w=2.0,h=2.0,color="body",outline="white"},{op="circle",r=0.35,color="palecyan",alpha=0.6}]

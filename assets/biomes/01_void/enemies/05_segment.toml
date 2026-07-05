@@ -1,0 +1,15 @@
+# Segment
+name="Coilspawn"
+sprite="sprites/01_void/coilspawn.png"
+flavor="One vertebra of something far too long to kill politely."
+move="snake"
+move_params={ edge_margin=30, row_drop=30 }
+fire="none"
+hp=9
+speed=60
+radius=10
+fire_interval=0.0
+min_stage=2
+color="clay"
+xp=1
+shape=[{op="circle",r=1.0,color="body"},{op="circle",r=0.35,color="white",alpha=0.5}]
