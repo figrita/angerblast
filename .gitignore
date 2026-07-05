@@ -20,5 +20,9 @@
 .DS_Store
 *.swp
 
+# Python bytecode cache
+__pycache__/
+*.pyc
+
 # local Claude Code session config/permissions (machine-specific, not shared)
 /.claude/
