@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Angerblast Art</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: arcade cabinet bezel. Compact masthead, sticky chip nav, each biome = scrolling
+   background strip beside its boss + enemy roster, then item sheets as tile grids.
+   Single dark theme on purpose: the art was drawn for a black playfield. */
+:root {
+  color-scheme: dark;
+  --void: #07081a;      /* page ground, a navy-biased black */
+  --ink: #12173d;       /* panels */
+  --stage: #1a2050;     /* sprite stage */
+  --grape: #53427f;     /* borders */
+  --peri: #6b74b2;      /* muted text */
+  --lilac: #a9b3e8;     /* body text */
+  --white: #f4f5ff;
+  --coral: #ff695a;     /* accent */
+  --wine: #b22e69;
+  --gold: #ffe091;
+  --display: "Pixelify Sans", "Silkscreen", ui-monospace, monospace;
+  --body: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Menlo, Consolas, monospace;
+}
+* { box-sizing: border-box }
+html { background: var(--void) }
+body {
+  background: var(--void); color: var(--lilac);
+  font: 14px/1.55 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 28px 56px; display: flex; flex-direction: column; gap: 40px }
+a { color: var(--gold) }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px }
+
+/* masthead */
+.mast { display: flex; flex-wrap: wrap; gap: 20px 28px; align-items: center; justify-content: space-between }
+.brand { display: flex; gap: 16px; align-items: center; min-width: 0 }
+.brand .spr { flex: none }
+h1 {
+  margin: 0; font: 700 clamp(32px, 6vw, 52px)/1 var(--display); letter-spacing: .04em;
+  color: var(--coral); text-shadow: 3px 3px 0 var(--wine), 6px 6px 0 #000;
+}
+.tag { margin-top: 8px; color: var(--peri); font-size: 12px; letter-spacing: .2em; text-transform: uppercase }
+.links { display: flex; flex-wrap: wrap; gap: 10px }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px;
+  font: 500 13px/1 var(--body); text-decoration: none; letter-spacing: .04em;
+  color: var(--white); background: var(--ink); border: 1px solid var(--grape);
+  border-bottom-width: 3px;
+}
+.btn:hover { border-color: var(--gold); color: var(--gold) }
+.btn.primary { background: var(--coral); border-color: var(--wine); color: #1b0710 }
+.btn.primary:hover { background: var(--gold); border-color: #b08a3a; color: #1b0710 }
+.btn svg { width: 16px; height: 16px; fill: currentColor }
+.intro { margin: 0; max-width: 68ch; text-wrap: pretty }
+.intro b { color: var(--white); font-weight: 500 }
+
+/* nav */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--void) }
+nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))) calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+  padding: 10px max(16px, env(safe-area-inset-right, 0px)) 10px max(16px, env(safe-area-inset-left, 0px));
+  background: color-mix(in srgb, var(--void) 92%, transparent); backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--ink);
+}
+nav ul { list-style: none; margin: 0 auto; padding: 0; max-width: 1180px; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none }
+nav a {
+  display: block; white-space: nowrap; padding: 5px 10px; font-size: 12px; text-decoration: none;
+  color: var(--lilac); border: 1px solid var(--ink); background: var(--ink);
+}
+nav a:hover { color: var(--gold); border-color: var(--grape) }
+nav .sep { width: 1px; background: var(--grape); margin: 4px 6px; flex: none }
+
+/* section heads */
+section { scroll-margin-top: 64px; display: flex; flex-direction: column; gap: 18px }
+.sh { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap }
+.sh .num { font: 700 14px var(--display); color: var(--coral); letter-spacing: .1em }
+h2 { margin: 0; font: 700 28px/1.1 var(--display); color: var(--white); letter-spacing: .03em; text-wrap: balance }
+.lede { margin: 0; color: var(--peri); max-width: 68ch }
+h3 { margin: 0; font: 500 11px var(--body); letter-spacing: .24em; text-transform: uppercase; color: var(--gold) }
+
+/* biome block */
+.biome { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 24px; align-items: start }
+.strip {
+  width: 240px; height: 560px; border: 2px solid var(--grape);
+  background-repeat: repeat-y; background-size: 240px auto; image-rendering: pixelated;
+  box-shadow: 0 0 0 2px #000, 0 0 40px color-mix(in srgb, var(--grape) 40%, transparent);
+  position: sticky; top: 72px;
+}
+.biome .col { display: flex; flex-direction: column; gap: 22px; min-width: 0 }
+.bossrow { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-end }
+
+/* tiles */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(124px, 1fr)); gap: 10px }
+.tile {
+  all: unset; box-sizing: border-box; cursor: zoom-in; display: flex; flex-direction: column;
+  background: var(--ink); border: 1px solid color-mix(in srgb, var(--grape) 60%, var(--ink));
+}
+.tile:hover { border-color: var(--gold) }
+.tile:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px }
+.tile .st {
+  display: grid; place-items: center; height: 124px; padding: 8px;
+  background: radial-gradient(circle at 50% 55%, var(--stage), var(--ink) 75%);
+}
+.tile.big .st { height: auto; min-height: 180px; padding: 18px 22px }
+.tile .cap { padding: 8px 10px 9px; display: flex; flex-direction: column; gap: 2px; border-top: 1px solid var(--void) }
+.tile .nm { color: var(--white); font-size: 13px; line-height: 1.3 }
+.tile .meta { color: var(--peri); font-size: 11px; font-variant-numeric: tabular-nums }
+.spr { background-repeat: no-repeat; image-rendering: pixelated; image-rendering: crisp-edges; max-width: 100% }
+.spr { image-rendering: pixelated }
+
+footer { color: var(--peri); font-size: 12px; border-top: 1px solid var(--ink); padding-top: 18px; display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between }
+
+/* viewer */
+dialog {
+  border: 2px solid var(--grape); background: var(--ink); color: var(--lilac); padding: 0;
+  width: min(680px, calc(100vw - 32px)); max-height: calc(100vh - 32px);
+  box-shadow: 0 0 0 2px #000, 0 20px 80px #000;
+}
+dialog::backdrop { background: rgba(4, 5, 16, .82) }
+.dv { display: flex; flex-direction: column }
+.dv .big { display: grid; place-items: center; padding: 28px; min-height: 260px; background: radial-gradient(circle, var(--stage), var(--ink) 70%); overflow: auto }
+.dv .frames { display: flex; gap: 8px; padding: 14px 18px; overflow-x: auto; border-top: 1px solid var(--void); background: var(--void) }
+.dv .frames .f { flex: none; background: var(--ink); padding: 6px; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 10px; color: var(--peri) }
+.dv .frames .f.on { outline: 1px solid var(--gold) }
+.dv .info { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 18px }
+.dv .info .nm { font: 700 22px var(--display); color: var(--white) }
+.dv .info .meta { font-size: 12px; color: var(--peri) }
+.close { all: unset; cursor: pointer; padding: 8px 12px; border: 1px solid var(--grape); color: var(--lilac); font-size: 12px }
+.close:hover, .close:focus-visible { border-color: var(--gold); color: var(--gold) }
+
+@media (max-width: 720px) {
+  .biome { grid-template-columns: minmax(0, 1fr) }
+  .strip { position: static; width: 100%; height: 160px; background-size: 100% auto; background-repeat: repeat-y }
+  .grid { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)) }
+  .tile .st { height: 104px }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="mast">
+    <div class="brand">
+      <span class="spr" data-src="art/common_player_sheet.png" data-fw="36" data-n="6" data-scale="2"></span>
+      <div>
+        <h1>ANGERBLAST</h1>
+        <div class="tag">Art gallery · vertical shmup roguelite</div>
+      </div>
+    </div>
+    <div class="links">
+      <a class="btn primary" href="https://figrita.github.io/angerblast/" target="_blank" rel="noopener">Play in browser</a>
+      <a class="btn" href="https://github.com/figrita/angerblast" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        figrita/angerblast
+      </a>
+    </div>
+    <p class="intro" id="intro">Every sprite in the game, playing its real animation. <b>Six biomes</b>, each with its scrolling playfield, boss and enemy roster, then the ships, weapons and pickups. Click any sprite to see it large, frame by frame.</p>
+  </header>
+
+  <nav aria-label="Sections"><ul id="nav"></ul></nav>
+
+  <main id="main" style="display:flex;flex-direction:column;gap:56px"></main>
+
+  <footer>
+    <span>ANGERBLAST · C + raylib · palette: BLK NX64</span>
+    <span>Source: <a href="https://github.com/figrita/angerblast" target="_blank" rel="noopener">github.com/figrita/angerblast</a></span>
+  </footer>
+</div>
+
+<dialog id="dlg" aria-label="Sprite viewer">
+  <div class="dv">
+    <div class="info">
+      <div><div class="nm" id="dnm"></div><div class="meta" id="dmeta"></div></div>
+      <button class="close" id="dclose" type="button">Close</button>
+    </div>
+    <div class="big" id="dbig"></div>
+    <div class="frames" id="dframes"></div>
+  </div>
+</dialog>
+
+<script src="manifest.js"></script>
+<script>
+(function () {
+  var G = window.GALLERY;
+  var nav = document.getElementById("nav"), main = document.getElementById("main");
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  // sprite element: a div showing one frame of a horizontal sheet, scaled by an integer
+  function spr(s, scale) {
+    var d = el("span", "spr");
+    d.dataset.src = s.src; d.dataset.fw = s.fw; d.dataset.n = s.n; d.dataset.scale = scale;
+    return d;
+  }
+  function setup(d) {
+    var fw = +d.dataset.fw, n = +d.dataset.n, sc = +d.dataset.scale;
+    d.style.display = "block";
+    d.style.width = fw * sc + "px"; d.style.height = fw * sc + "px";
+    d.style.backgroundImage = "url('" + d.dataset.src + "')";
+    d.style.backgroundSize = (fw * n * sc) + "px " + (fw * sc) + "px";
+  }
+  function fit(fw, target, lo, hi) { return Math.max(lo, Math.min(hi, Math.round(target / fw))); }
+
+  var all = []; // every item, for the viewer
+  function tile(s, scale, big) {
+    var b = el("button", "tile" + (big ? " big" : ""));
+    b.type = "button";
+    var st = el("div", "st"); st.appendChild(spr(s, scale)); b.appendChild(st);
+    var cap = el("div", "cap");
+    cap.appendChild(el("span", "nm", esc(s.name)));
+    cap.appendChild(el("span", "meta", (s.note ? esc(s.note) + " · " : "") + s.fw + "px"));
+    b.appendChild(cap);
+    b.setAttribute("aria-label", s.name + (s.note ? ", " + s.note : "") + ". Open viewer");
+    b.addEventListener("click", function () { openViewer(s); });
+    all.push(s);
+    return b;
+  }
+  function navLink(id, label) { var li = el("li"); li.innerHTML = '<a href="#' + id + '">' + esc(label) + "</a>"; nav.appendChild(li); }
+
+  // biomes
+  var strips = [];
+  G.biomes.forEach(function (b) {
+    navLink(b.id, b.name);
+    var sec = el("section"); sec.id = b.id;
+    var sh = el("div", "sh");
+    sh.appendChild(el("span", "num", "BIOME " + b.num));
+    sh.appendChild(el("h2", null, esc(b.name)));
+    sec.appendChild(sh);
+    var grid = el("div", "biome");
+    var strip = el("div", "strip"); strip.style.backgroundImage = "url('" + b.bg + "')";
+    strip.setAttribute("role", "img"); strip.setAttribute("aria-label", b.name + " scrolling background");
+    strips.push(strip); grid.appendChild(strip);
+    var col = el("div", "col");
+    col.appendChild(el("p", "lede", esc(b.blurb) + " Boss: <b style='color:var(--white);font-weight:500'>" + esc(b.boss) + "</b>."));
+    var maxBoss = Math.max.apply(null, b.bosses.map(function (s) { return s.fw; }));
+    var bscale = fit(maxBoss, 230, 1, 3);
+    var bwrap = el("div"); bwrap.style.cssText = "display:flex;flex-direction:column;gap:10px";
+    bwrap.appendChild(el("h3", null, "Boss"));
+    var row = el("div", "bossrow");
+    b.bosses.forEach(function (s) { row.appendChild(tile(s, bscale, true)); });
+    bwrap.appendChild(row); col.appendChild(bwrap);
+    var ewrap = el("div"); ewrap.style.cssText = "display:flex;flex-direction:column;gap:10px";
+    ewrap.appendChild(el("h3", null, "Enemies · " + b.enemies.length));
+    var eg = el("div", "grid");
+    b.enemies.forEach(function (s) { eg.appendChild(tile(s, fit(s.fw, 84, 1, 5))); });
+    ewrap.appendChild(eg); col.appendChild(ewrap);
+    grid.appendChild(col); sec.appendChild(grid); main.appendChild(sec);
+  });
+  var sep = el("li", "sep"); sep.setAttribute("aria-hidden", "true"); nav.appendChild(sep);
+
+  // item groups
+  G.groups.forEach(function (g) {
+    navLink(g.id, g.title);
+    var sec = el("section"); sec.id = g.id;
+    var sh = el("div", "sh"); sh.appendChild(el("h2", null, esc(g.title)));
+    sh.appendChild(el("span", "num", g.items.length)); sec.appendChild(sh);
+    sec.appendChild(el("p", "lede", esc(g.lede)));
+    var gr = el("div", "grid");
+    g.items.forEach(function (s) { gr.appendChild(tile(s, fit(s.fw, 84, 1, 5))); });
+    sec.appendChild(gr); main.appendChild(sec);
+  });
+
+  var total = G.biomes.reduce(function (a, b) { return a + b.bosses.length + b.enemies.length; }, 0) +
+              G.groups.reduce(function (a, g) { return a + g.items.length; }, 0);
+  document.querySelector(".tag").textContent = "Art gallery · " + total + " animated sprites";
+
+  // viewer
+  var dlg = document.getElementById("dlg"), dbig = document.getElementById("dbig"), dfr = document.getElementById("dframes");
+  function openViewer(s) {
+    document.getElementById("dnm").textContent = s.name;
+    document.getElementById("dmeta").textContent = (s.note ? s.note + " · " : "") + s.fw + "×" + s.fh + " px · " + s.n + " frame" + (s.n > 1 ? "s" : "");
+    dbig.innerHTML = ""; dfr.innerHTML = "";
+    var sc = fit(s.fw, s.fw > 120 ? 320 : 240, 1, 12);
+    var big = spr(s, sc); setup(big); dbig.appendChild(big);
+    var fsc = fit(s.fw, 56, 1, 4);
+    for (var i = 0; i < s.n; i++) {
+      var f = el("div", "f"); var fs = spr(s, fsc); fs.dataset.fixed = i; setup(fs);
+      fs.style.backgroundPosition = (-i * s.fw * fsc) + "px 0";
+      f.appendChild(fs); f.appendChild(el("span", null, "frame " + (i + 1))); dfr.appendChild(f);
+    }
+    if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
+  }
+  document.getElementById("dclose").addEventListener("click", function () { dlg.close ? dlg.close() : dlg.removeAttribute("open"); });
+  dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); });
+
+  // animate: every sprite steps through its sheet at 8 fps; background strips scroll down
+  var sprites = [].slice.call(document.querySelectorAll(".spr"));
+  sprites.forEach(setup);
+  var FPS = 8, SCROLL = 38; // px/s at 240px strip width
+  function tick(t) {
+    var frame = Math.floor(t / (1000 / FPS));
+    var live = document.querySelectorAll(".spr:not([data-fixed])");
+    for (var i = 0; i < live.length; i++) {
+      var d = live[i], n = +d.dataset.n; if (n < 2) continue;
+      d.style.backgroundPosition = (-(frame % n) * d.dataset.fw * d.dataset.scale) + "px 0";
+    }
+    for (var j = 0; j < strips.length; j++) {
+      var s = strips[j], w = s.clientWidth, h = w * 4; // backgrounds are 720×2880
+      s.style.backgroundSize = w + "px " + h + "px";
+      s.style.backgroundPosition = "0 " + ((t / 1000 * SCROLL * (w / 240)) % h) + "px";
+    }
+    if (!reduce) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>
